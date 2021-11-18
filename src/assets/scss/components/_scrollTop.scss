@@ -1,0 +1,63 @@
+.scroll-area {
+  position: relative;
+  bottom: 22px;
+  z-index: 0;
+  @include extraSmall {
+    bottom: 0;
+  }
+  @media (max-width: 447px) {
+    bottom: 16px;
+  }
+
+  .scroll-top {
+    position: relative;
+    transition: $setTransition;
+    &:hover {
+      color: #fff;
+      cursor: pointer;
+      .arrow {
+        animation: ani-scrollTop 0.3s linear infinite;
+      }
+      @include extraSmall {
+        .arrow {
+          animation: none;
+        }
+      }
+    }
+
+    .arrow {
+      position: absolute;
+      width: 18px;
+      height: 22px;
+      background-image: url('~@/assets/images/scroll_top_bg.png');
+      background-size: 18px 11px;
+      background-position: 0 0;
+      left: 50%;
+      bottom: 62px;
+      z-index: 1;
+      transform: translateX(-50%);
+      transition: background-position 0.3s linear 0s;
+      @include extraSmall {
+        width: 16px;
+        height: 20px;
+        background-size: 16px 10px;
+        bottom: 65px;
+      }
+    }
+    .bg {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      background: $textDarkColor;
+      border-top-left-radius: 8px;
+      left: 50%;
+      bottom: 17px;
+      transform: translateX(-50%) rotate(45deg) skew(0);
+      @include extraSmall {
+        width: 60px;
+        height: 60px;
+        bottom: 35px;
+      }
+    }
+  }
+}

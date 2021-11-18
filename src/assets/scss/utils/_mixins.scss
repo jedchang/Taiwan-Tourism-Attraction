@@ -1,0 +1,80 @@
+@keyframes slide {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 1920px 0;
+  }
+}
+
+@keyframes flash {
+  0% {
+    color: $secondaryColor;
+  }
+
+  50% {
+    color: lighten($secondaryColor, 50%);
+  }
+
+  100% {
+    color: $secondaryColor;
+  }
+}
+
+@keyframes bounce-delay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes ani-scrollTop {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: 0px -11px;
+  }
+}
+
+@mixin extraSmall {
+  @media (max-width: 575px) {
+    @content;
+  }
+}
+
+@mixin small {
+  @media (min-width: 576px) and (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin medium {
+  @media (min-width: 768px) and (max-width: 991px) {
+    @content;
+  }
+}
+
+@mixin large {
+  @media (min-width: 992px) and (max-width: 1199px) {
+    @content;
+  }
+}
+
+@mixin extraLarge {
+  @media (min-width: 1200px) and (max-width: 1399px) {
+    @content;
+  }
+}
+
+@mixin extraExtraLarge {
+  @media (min-width: 1400px) {
+    @content;
+  }
+}

@@ -1,0 +1,1236 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#app {
+  font-family: 'Rubik', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  background-color: #f5f6f6;
+  color: #2c3e50;
+  position: relative;
+
+  a {
+    text-decoration: none;
+  }
+
+  .vld-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .vld-overlay {
+    overflow: hidden;
+    height: 100vh;
+  }
+  .vld-overlay.is-full-page {
+    z-index: 9999;
+  }
+  .vld-overlay .vld-background {
+    background-color: #292a3f;
+    opacity: 0.8;
+  }
+
+  .spinner {
+    margin: 15px auto 0;
+    width: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .spinner > div {
+    width: 14px;
+    height: 14px;
+    background-color: $secondaryColor;
+
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: bounce-delay 1.4s infinite ease-in-out both;
+    animation: bounce-delay 1.4s infinite ease-in-out both;
+  }
+
+  .spinner .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+  }
+
+  .spinner .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+  }
+
+  .banner-section {
+    position: relative;
+    padding: 216px 0 270px 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('~@/assets/images/banner.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    @include small {
+      padding: 116px 0 170px 0;
+    }
+    @include extraSmall {
+      padding: 50px 0 60px 0;
+    }
+    &:before {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 100%;
+      background: -webkit-linear-gradient(
+        -90deg,
+        rgba(0, 0, 0, 0.4),
+        rgba(0, 0, 0, 0) 100%
+      );
+      top: 0;
+      right: 0;
+    }
+
+    .dot-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #162241 url('~@/assets/images/dot_overlay.png') repeat;
+      opacity: 0.2;
+    }
+
+    .pattern-layer {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 95px;
+      background-image: url('~@/assets/images/cloud_shape.png');
+      background-repeat: repeat-x;
+      animation: slide 100s linear infinite;
+    }
+
+    .content-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      flex-direction: column;
+    }
+
+    .title-inner {
+      width: 80%;
+      padding: 0 25px;
+      margin-bottom: 30px;
+      @include large {
+        width: 100%;
+      }
+      @include medium {
+        width: 100%;
+      }
+      @include small {
+        padding: 0 15px;
+        width: 100%;
+      }
+      @include extraSmall {
+        width: 100%;
+        padding: 0;
+      }
+      .logo {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+        position: relative;
+        margin-bottom: 15px;
+        @include extraSmall {
+          flex-direction: column;
+          align-items: flex-start;
+          margin-bottom: 25px;
+        }
+        img {
+          width: 210px;
+          height: auto;
+          z-index: 2;
+          margin-right: 20px;
+          @include medium {
+            width: 180px;
+            margin-right: 10px;
+          }
+          @include small {
+            width: 150px;
+            margin-right: 10px;
+          }
+          @include extraSmall {
+            width: 150px;
+            margin-right: 0px;
+            margin-bottom: 10px;
+          }
+        }
+        h2 {
+          position: relative;
+          display: block;
+          font-size: 76px;
+          font-weight: 900;
+          font-family: 'Roboto', sans-serif;
+          text-align: left;
+          color: $secondaryColor;
+          text-transform: uppercase;
+          background-clip: text;
+          text-shadow: 0 0 15px rgb(0, 139, 137);
+          @include medium {
+            font-size: 64px;
+          }
+          @include small {
+            font-size: 46px;
+            line-height: 1.3;
+          }
+          @include extraSmall {
+            font-size: 42px;
+            line-height: initial;
+            text-transform: uppercase;
+          }
+        }
+      }
+      p {
+        position: relative;
+        font-size: 32px;
+        color: #ffffff;
+        font-weight: 600;
+        text-align: left;
+        text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        @include medium {
+          font-size: 26px;
+        }
+        @include small {
+          font-size: 20px;
+          line-height: 1.3;
+        }
+        @include extraSmall {
+          font-size: 20px;
+          line-height: 1.3;
+        }
+      }
+    }
+
+    .search-inner {
+      width: 80%;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      @include large {
+        width: 100%;
+      }
+      @include medium {
+        width: 100%;
+      }
+      @include small {
+        width: 100%;
+        flex-direction: column;
+      }
+      @include extraSmall {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      select {
+        width: 40%;
+        height: auto;
+        padding: 15px 40px;
+        font-size: 16px;
+        line-height: 25px;
+        color: $textColor;
+        appearance: none;
+        background-image: linear-gradient(
+            45deg,
+            transparent 50%,
+            $secondaryColor 0
+          ),
+          linear-gradient(135deg, $secondaryColor 50%, transparent 0),
+          linear-gradient(90deg, $secondaryColor, $secondaryColor);
+        background-position: calc(100% - 19px) calc(1em + 8px),
+          calc(100% - 12px) calc(1em + 8px), calc(100% - 2.5em) 0.5em;
+        background-size: 7px 7px, 7px 7px, 1px 2.5em;
+        background-repeat: no-repeat;
+        letter-spacing: 1px;
+        border-radius: 6px;
+        border: 1px solid $secondaryColor;
+        @include extraLarge {
+          width: 35%;
+        }
+        @include large {
+          width: 35%;
+        }
+        @include medium {
+          width: 42%;
+        }
+        @include small {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+        @include extraSmall {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+        &:focus {
+          border: 1px solid $secondaryColor;
+          outline: none;
+        }
+        &:disabled {
+          border: 1px solid transparent;
+          background-color: #061a3a;
+          opacity: 0.6;
+          pointer-events: none;
+          cursor: default;
+          color: #959595;
+          background-image: linear-gradient(45deg, transparent 50%, #38609f 0),
+            linear-gradient(135deg, #38609f 50%, transparent 0),
+            linear-gradient(90deg, #38609f, #38609f);
+        }
+      }
+
+      .keyword-search {
+        width: 35%;
+        padding: 15px 40px;
+        font-size: 16px;
+        line-height: 25px;
+        letter-spacing: 1px;
+        border-radius: 6px;
+        border: 1px solid $secondaryColor;
+        color: $textColor;
+        @include extraLarge {
+          width: 35%;
+        }
+        @include large {
+          width: 35%;
+        }
+        @include medium {
+          width: 42%;
+        }
+        @include small {
+          width: 100%;
+        }
+        @include extraSmall {
+          width: 100%;
+        }
+        &:focus {
+          outline: none;
+          border: 1px solid $secondaryColor;
+        }
+        &:disabled {
+          border: 1px solid transparent;
+          background-color: #061a3a;
+          opacity: 0.6;
+          pointer-events: none;
+          cursor: default;
+        }
+      }
+
+      .search-btn {
+        width: 20%;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        font-size: 16px;
+        line-height: 25px;
+        font-weight: 500;
+        color: #fff;
+        text-align: center;
+        padding: 15px 40px;
+        border-radius: 4px;
+        border: none;
+        z-index: 1;
+        background-color: $primaryColor;
+        transition: $setTransition;
+        @include extraLarge {
+          width: 25%;
+        }
+        @include large {
+          width: 25%;
+        }
+        @include medium {
+          width: 10%;
+          p {
+            display: none;
+          }
+        }
+        @include small {
+          width: 100%;
+          margin-top: 20px;
+        }
+        @include extraSmall {
+          width: 100%;
+          margin-top: 20px;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #ce5a54;
+        }
+        &.disable {
+          background-color: $textDarkColor;
+          pointer-events: none;
+          cursor: default;
+          opacity: 0.6;
+          color: #959595;
+        }
+        span {
+          margin-right: 5px;
+          @include medium {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.content-wrap {
+  padding-top: 15px;
+  padding-bottom: 50px;
+  @include small {
+    padding-top: 5px;
+    padding-bottom: 50px;
+  }
+  @include extraSmall {
+    padding-top: 0;
+    padding-bottom: 45px;
+  }
+  .txt-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    @include extraSmall {
+      flex-direction: column;
+    }
+    .material-icons {
+      font-size: 32px;
+      margin-right: 5px;
+      @include extraSmall {
+        font-size: 36px;
+        margin-right: 0;
+        margin-bottom: 5px;
+      }
+    }
+    .txt {
+      font-size: 32px;
+      font-weight: 600;
+      @include extraSmall {
+        font-size: 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      span {
+        margin-right: 22px;
+        &:last-child {
+          margin-right: 0;
+        }
+        @include extraSmall {
+          margin-right: 0;
+          margin-bottom: 3px;
+        }
+      }
+    }
+  }
+  &.no-content {
+    margin: 60px 0 50px 0;
+    animation: flash 1.5s linear infinite;
+    @include small {
+      margin: 20px 0 0 0;
+    }
+    @include extraSmall {
+      margin: 20px 0 20px 0;
+    }
+    .txt {
+      position: relative;
+      @include small {
+        font-size: 22px;
+      }
+      @include extraSmall {
+        font-size: 22px;
+      }
+      &:after {
+        content: '/';
+        position: absolute;
+        top: 5px;
+        left: 230px;
+        font-size: 20px;
+        opacity: 0.6;
+        @include small {
+          top: 1px;
+          left: 159px;
+        }
+        @include extraSmall {
+          content: none;
+        }
+      }
+      &.no-search {
+        &:after {
+          content: none;
+        }
+      }
+    }
+  }
+
+  .el-tabs {
+    margin-top: 20px;
+    .el-tabs__header {
+      border-bottom: 1px solid $borderColor;
+      @include extraSmall {
+        border-bottom: none;
+      }
+    }
+    .el-tabs__nav-scroll {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @include extraSmall {
+        flex-direction: column;
+      }
+      .el-tabs__item {
+        font-size: 16px;
+        font-weight: 600;
+        height: auto;
+        color: $textColor;
+        @include extraSmall {
+          border-bottom: none;
+          border-left: none;
+          padding: 0;
+        }
+        &.is-active {
+          color: $primaryColor;
+          border-bottom-color: #f5f6f6;
+        }
+        &:nth-child(2) {
+          @include extraSmall {
+            padding-left: 0;
+          }
+        }
+        &:last-child {
+          @include extraSmall {
+            padding-right: 0;
+          }
+        }
+      }
+      .el-tabs__nav {
+        border: 1px solid $borderColor;
+        @include extraSmall {
+          border: none;
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+      }
+
+      .label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 15px 40px;
+        flex-direction: column;
+        line-height: 1.3;
+        @include extraSmall {
+          border: 1px solid #d7d7d7;
+          margin-bottom: 10px;
+          flex-direction: row;
+        }
+        .material-icons {
+          font-size: 32px;
+          margin-bottom: 8px;
+          @include extraSmall {
+            font-size: 24px;
+            margin-bottom: 0;
+            margin-right: 8px;
+          }
+        }
+      }
+    }
+  }
+
+  .tab-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px 0 50px 0;
+    @include extraSmall {
+      margin: 0px 0 0 0;
+    }
+    .material-icons {
+      font-size: 62px;
+    }
+  }
+
+  .result-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto 40px auto;
+    border: 1px solid $borderColor;
+    color: $textColor;
+    padding: 20px 30px;
+    border-radius: 6px;
+    font-size: 14px;
+    box-shadow: 0px 6px 20px 0px rgba(0, 0, 0, 0.08);
+    @include small {
+      width: 100%;
+      padding: 20px;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+    @include extraSmall {
+      width: 100%;
+      padding: 15px 15px;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .display {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      width: 60%;
+      height: 25px;
+      line-height: 25px;
+      @include small {
+        justify-content: flex-start;
+        width: 100%;
+        height: auto;
+        line-height: initial;
+      }
+      @include extraSmall {
+        justify-content: flex-start;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        line-height: initial;
+      }
+      .material-icons {
+        color: $textColor;
+        @include extraSmall {
+          display: none;
+        }
+      }
+      span {
+        font-size: 20px;
+        font-weight: 600;
+        color: $secondaryColor;
+      }
+      .show {
+        margin-right: 12px;
+        padding-right: 12px;
+        border-right: 1px solid #c9c9c9;
+        @include extraSmall {
+          margin-right: 0;
+          padding-right: 0;
+          border-right: none;
+          font-size: 16px;
+          margin-bottom: 7px;
+          border-bottom: 1px dashed #c3c3c3;
+          padding-bottom: 7px;
+          width: 100%;
+        }
+      }
+      .counter {
+        @include extraSmall {
+          font-size: 16px;
+        }
+        span {
+          color: $primaryColor;
+        }
+      }
+      &.data-search {
+        animation: flash 1.5s linear infinite;
+        @include small {
+          margin: 60px 0 20px 0;
+        }
+        @include extraSmall {
+          margin: 20px 0 20px 0;
+        }
+        .txt-search {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: left;
+          .material-icons {
+            font-size: 22px;
+            margin-right: 3px;
+            color: $secondaryColor;
+            @include extraSmall {
+              font-size: 26px;
+              margin-right: 5px;
+              margin-bottom: 1px;
+            }
+          }
+          .txt {
+            font-size: 20px;
+            font-weight: 600;
+            @include extraSmall {
+              font-size: 24px;
+            }
+          }
+        }
+      }
+    }
+    &.result-selected {
+      width: 100%;
+      max-width: 700px;
+      @include small {
+        width: 100%;
+      }
+      @include extraSmall {
+        width: 100%;
+      }
+      .city {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 40%;
+        height: 25px;
+        line-height: 25px;
+        @include small {
+          justify-content: flex-start;
+          width: 100%;
+          margin-bottom: 10px;
+        }
+        @include extraSmall {
+          justify-content: center;
+          width: 100%;
+          margin-bottom: 7px;
+          margin-right: 0;
+          font-size: 16px;
+          border-bottom: 1px dashed #c3c3c3;
+          padding-bottom: 7px;
+        }
+        span {
+          font-size: 20px;
+          font-weight: 600;
+          color: $secondaryColor;
+          margin-left: 5px;
+          @include small {
+            margin-left: 0;
+          }
+          @include extraSmall {
+            margin-left: 5px;
+          }
+        }
+        .material-icons {
+          color: $textColor;
+          @include extraSmall {
+            display: none;
+          }
+        }
+      }
+    }
+    &.result-keyword {
+      width: 700px;
+      @include medium {
+        width: 696px;
+      }
+      @include small {
+        width: 516px;
+      }
+      @include extraSmall {
+        width: 100%;
+      }
+      .word {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 40%;
+        height: 25px;
+        line-height: 25px;
+        @include small {
+          justify-content: flex-start;
+          width: 100%;
+          margin-bottom: 10px;
+        }
+        @include extraSmall {
+          justify-content: center;
+          width: 100%;
+          margin-bottom: 7px;
+          margin-right: 0;
+          font-size: 16px;
+          border-bottom: 1px dashed #c3c3c3;
+          padding-bottom: 7px;
+        }
+        span {
+          font-size: 20px;
+          font-weight: 600;
+          color: $secondaryColor;
+          margin-left: 5px;
+          @include small {
+            margin-left: 0;
+          }
+          @include extraSmall {
+            margin-left: 5px;
+          }
+        }
+        .material-icons {
+          color: $textColor;
+          @include extraSmall {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  .item {
+    background-color: #ffffff;
+    -webkit-box-shadow: 0px 3px 9px #071c551f;
+    box-shadow: 0px 3px 9px #071c551f;
+    position: relative;
+    margin-bottom: 35px;
+    padding: 8px;
+    border-radius: 6px;
+    height: 407px;
+    @include small {
+      height: 416px;
+    }
+    @include extraSmall {
+      height: 470px;
+      width: 100%;
+      margin: 0 0 30px 0;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      height: 10px;
+      width: 100%;
+      background: rgba(243, 148, 30, 0.3);
+      bottom: 0;
+      left: 0;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      left: auto;
+      right: 0;
+      bottom: 0;
+      width: 0%;
+      height: 10px;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      background-color: $primaryColor;
+      transition: $setTransition;
+      visibility: hidden;
+      opacity: 0;
+    }
+    &:hover {
+      &:after {
+        visibility: visible;
+        opacity: 1;
+        right: auto;
+        left: 0;
+        width: 100%;
+        bottom: 0;
+      }
+      .thumb img {
+        transform: scale(1.1);
+      }
+      .thumb:after {
+        visibility: visible;
+        opacity: 0.2;
+      }
+      .thumb .detail-btn {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(-40%);
+      }
+    }
+  }
+
+  .thumb {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    height: 203px;
+    background-color: #e7e7e7;
+    @include small {
+      height: 250px;
+    }
+    @include extraSmall {
+      height: 250px;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000000;
+      transition: $setTransition;
+      z-index: 0;
+      visibility: hidden;
+      opacity: 0;
+    }
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-height: 203px;
+      object-fit: cover;
+      object-position: center;
+      transition: $setTransition;
+      @include small {
+        width: 100%;
+        height: 100%;
+        min-height: 250px;
+      }
+      @include extraSmall {
+        width: 100%;
+        height: 100%;
+        min-height: 250px;
+      }
+    }
+    .detail-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(0);
+      opacity: 0;
+      visibility: hidden;
+      width: 50%;
+      padding: 8px 16px;
+      background-color: $secondaryColor;
+      color: #fff;
+      border-radius: 20px;
+      z-index: 2;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: $setTransition;
+      @include extraLarge {
+        width: 60%;
+      }
+      @include large {
+        width: 55%;
+      }
+      @include medium {
+        width: 50%;
+      }
+      @include small {
+        width: 50%;
+        padding: 16px 16px;
+        border-radius: 25px;
+      }
+      @include extraSmall {
+        width: 55%;
+        padding: 16px 16px;
+        border-radius: 25px;
+      }
+      &:hover {
+        background-color: darken($secondaryColor, 10%);
+        cursor: pointer;
+      }
+      span {
+        margin-left: 5px;
+      }
+      .material-icons {
+        font-size: 22px;
+      }
+    }
+  }
+
+  .picture {
+    position: relative;
+    a {
+      display: block;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 240px;
+        object-fit: cover;
+      }
+    }
+    .type {
+      top: -13px;
+      left: 0;
+      font-size: 1.25rem;
+      background-color: $primaryColor;
+      padding: 12px 20px;
+      position: absolute;
+      border-radius: 0 5px 5px 0px;
+      color: #fff;
+      text-align: center;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 12px 20px;
+    position: relative;
+
+    .category {
+      width: auto;
+      height: 32px;
+      background-color: #ffffff;
+      border-top-right-radius: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: -16px;
+      left: 0px;
+      padding: 6px 12px;
+      .material-icons {
+        font-size: 20px;
+        color: $secondaryColor;
+      }
+      p {
+        font-size: 12px;
+        text-transform: uppercase;
+        color: $secondaryColor;
+        margin-left: 5px;
+      }
+    }
+
+    .name {
+      font-size: 22px;
+      font-weight: 600;
+      height: 55px;
+      color: $textDarkColor;
+      margin-bottom: 20px;
+      padding-bottom: 5px;
+      text-align: left;
+    }
+
+    .tags-all {
+      margin-bottom: 3px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-wrap: wrap;
+      li {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        color: $textColor;
+        list-style: none;
+        text-align: left;
+        font-size: 14px;
+        word-break: break-all;
+        margin-right: 10px;
+        margin-bottom: 8px;
+        &:last-child {
+          margin-right: 0;
+        }
+        .tag {
+          padding: 6px 8px;
+          border: 1px solid $primaryColor;
+          color: $primaryColor;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+
+  .load-more-btn {
+    margin-top: 50px;
+    padding: 12px 45px;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: 600;
+    color: $textDarkColor;
+    border: 1px solid $textDarkColor;
+    text-align: center;
+    border-radius: 4px;
+    z-index: 1;
+    width: 192px;
+    transition: $setTransition;
+    @include extraSmall {
+      margin-top: 40px;
+      margin-bottom: 55px;
+      width: 100%;
+      padding: 13px 45px;
+      font-size: 16px;
+    }
+    &:hover {
+      color: #ffffff;
+      box-shadow: 0px 15px 25px 0px rgba(255, 124, 91, 0.3);
+      border-color: $primaryColor;
+      &:before {
+        top: -40%;
+      }
+      @include extraSmall {
+        color: $textDarkColor;
+        box-shadow: none;
+        border: 1px solid $textDarkColor;
+      }
+    }
+    &:before {
+      transition-duration: 800ms;
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      content: '';
+      top: 110%;
+      left: 50%;
+      background: $primaryColor;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      z-index: -1;
+      @include extraSmall {
+        background: transparent;
+      }
+    }
+    .svg-inline--fa {
+      margin-right: 5px;
+    }
+  }
+}
+
+.el-dialog__wrapper {
+  .el-dialog {
+    box-shadow: none;
+    width: 50%;
+    @include extraLarge {
+      width: 60%;
+    }
+    @include large {
+      width: 60%;
+    }
+    @include medium {
+      width: 75%;
+    }
+    @include small {
+      width: 85%;
+    }
+    @include extraSmall {
+      width: 95%;
+    }
+    .el-dialog__header {
+      padding: 30px 20px 5px;
+      @include extraSmall {
+        padding: 45px 20px 5px;
+        text-align: left;
+      }
+      .el-dialog__title {
+        font-size: 24px;
+        font-weight: 600;
+        color: $secondaryColor;
+        @include extraSmall {
+          font-size: 20px;
+          line-height: 1.3;
+        }
+      }
+    }
+
+    .el-dialog__body {
+      padding: 10px 20px 30px 20px;
+      .content {
+        padding: 0;
+      }
+      .thumb {
+        position: relative;
+        overflow: hidden;
+        height: 300px;
+        @include extraSmall {
+          height: auto;
+        }
+        img {
+          display: block;
+          width: 100%;
+          height: 300px;
+          object-fit: cover;
+          object-position: 50% 60%;
+          @include extraSmall {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+          }
+        }
+      }
+      .desc {
+        margin: 20px 0 10px 0;
+        text-align: left;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .info {
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        @include extraSmall {
+          flex-direction: column;
+        }
+        li {
+          width: 48%;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          color: $textColor;
+          list-style: none;
+          text-align: left;
+          font-size: 14px;
+          margin-bottom: 8px;
+          padding-bottom: 8px;
+          border-bottom: 1px dashed #d7d7d7;
+          @include extraSmall {
+            width: 100%;
+          }
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+        .material-icons {
+          font-size: 20px;
+          margin-right: 7px;
+          color: $secondaryColor;
+        }
+        .website {
+          display: inline-block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          height: 20px;
+          color: $textColor;
+          line-height: 1.6;
+          transition: $setTransition;
+          &:hover {
+            color: $secondaryColor;
+          }
+        }
+        .map {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: $textColor;
+          line-height: 1.6;
+          transition: $setTransition;
+          &:hover {
+            color: $secondaryColor;
+          }
+        }
+      }
+    }
+  }
+}
