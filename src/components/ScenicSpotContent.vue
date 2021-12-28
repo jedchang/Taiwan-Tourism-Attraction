@@ -3,7 +3,7 @@
     <div
       v-for="s in scenicSpotTotalPages"
       :key="s.ScenicSpotID"
-      class="col-xl-3 col-lg-4 col-md-6"
+      class="col-xl-3 col-lg-4 col-md-6 col-12"
     >
       <div class="item">
         <div class="thumb">

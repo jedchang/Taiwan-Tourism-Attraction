@@ -97,10 +97,8 @@
     img {
       display: block;
       width: 100%;
-      // max-width: 100%;
       height: auto;
-      // height: 100%; // 設 auto 無法置中
-      min-height: 203px; // 有些圖片超高
+      min-height: 203px;
       object-fit: cover;
       object-position: center;
       transition: $setTransition;
@@ -209,6 +207,16 @@
       top: -16px;
       left: 0px;
       padding: 6px 12px;
+      @include small {
+        left: 50%;
+        transform: translateX(-50%);
+        border-top-left-radius: 6px;
+      }
+      @include extraSmall {
+        left: 50%;
+        transform: translateX(-50%);
+        border-top-left-radius: 6px;
+      }
       .material-icons {
         font-size: 20px;
         color: $secondaryColor;
@@ -224,11 +232,17 @@
     .name {
       font-size: 22px;
       font-weight: 600;
-      height: 55px; // 兩行標題高度
+      height: 55px;
       color: $textDarkColor;
       margin-bottom: 20px;
       padding-bottom: 5px;
       text-align: left;
+      @include small {
+        text-align: center;
+      }
+      @include extraSmall {
+        text-align: center;
+      }
     }
 
     .tags-all {
@@ -237,6 +251,12 @@
       justify-content: flex-start;
       align-items: center;
       flex-wrap: wrap;
+      @include small {
+        justify-content: center;
+      }
+      @include extraSmall {
+        justify-content: center;
+      }
       li {
         display: flex;
         justify-content: flex-start;

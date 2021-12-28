@@ -569,6 +569,12 @@
     }
     .status {
       margin: 30px 0 10px;
+      @include small {
+        margin: 30px 0 40px;
+      }
+      @include extraSmall {
+        margin: 30px 0 40px;
+      }
     }
     .material-icons {
       font-size: 62px;
@@ -576,18 +582,133 @@
   }
 
   .el-pagination {
+    margin-top: 60px;
+    padding: 0;
+    @include large {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    @include medium {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    @include small {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    @include extraSmall {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    button {
+      @include small {
+        height: 40px;
+        line-height: 40px;
+      }
+      @include extraSmall {
+        height: 40px;
+        line-height: 40px;
+      }
+    }
+
+    .el-pager {
+      .active {
+        color: #fff;
+        background-color: $primaryColor;
+      }
+    }
     &.is-background {
       .el-pager {
-        li:not(.disabled) {
-          &:hover {
-            color: $primaryColor;
+        @include large {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+        }
+        @include medium {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+        }
+        @include small {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+        }
+        @include extraSmall {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+        }
+        li {
+          @include large {
+            margin: 5px;
           }
-          &.active {
+          @include medium {
+            margin: 5px;
+          }
+          @include small {
+            margin: 5px;
+            min-width: 40px;
+            height: 40px;
+            line-height: 40px;
+          }
+          @include extraSmall {
+            margin: 5px;
+            min-width: 40px;
+            height: 40px;
+            line-height: 40px;
+          }
+        }
+        li:not(.disabled).active {
+          color: #fff;
+          background-color: $primaryColor;
+          &:hover {
+            color: #fff;
             background-color: $primaryColor;
-            &:hover {
-              color: #fff;
+          }
+        }
+        li:not(.disabled):hover {
+          color: $primaryColor;
+        }
+        .more {
+          &::before {
+            @include small {
+              line-height: 40px;
+            }
+            @include extraSmall {
+              line-height: 40px;
             }
           }
+        }
+      }
+
+      @include small {
+        .btn-prev {
+          margin: 0 5px 0 0;
+          min-width: 40px;
+        }
+        .btn-next {
+          margin: 0 5px 0 0;
+          min-width: 40px;
+        }
+      }
+      @include extraSmall {
+        .btn-prev {
+          margin: 0 0 0 5px;
+          min-width: 40px;
+        }
+        .btn-next {
+          margin: 0 0 0 5px;
+          min-width: 40px;
         }
       }
     }
