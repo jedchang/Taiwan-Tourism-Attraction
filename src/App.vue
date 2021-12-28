@@ -170,7 +170,7 @@
                       <div class="row">
                         <div
                           v-for="s in scenicSpotTotalPages"
-                          :key="s.ID"
+                          :key="s.ScenicSpotID"
                           class="col-xl-3 col-lg-4 col-md-6"
                         >
                           <div class="item">
@@ -204,7 +204,7 @@
                                 <p>Scenic Spot</p>
                               </div>
                               <h4 class="name">
-                                {{ s.Name }}
+                                {{ s.ScenicSpotName }}
                               </h4>
                               <ul class="tags-all">
                                 <li v-if="s.City">
@@ -264,7 +264,6 @@
                   </div>
                 </div>
               </el-tab-pane>
-
               <el-tab-pane
                 name="restaurant"
               >
@@ -341,7 +340,7 @@
                       <div class="row">
                         <div
                           v-for="r in restaurantTotalPages"
-                          :key="r.ID"
+                          :key="r.RestaurantID"
                           class="col-xl-3 col-lg-4 col-md-6"
                         >
                           <div class="item">
@@ -375,7 +374,7 @@
                                 <p>Restaurant</p>
                               </div>
                               <h4 class="name">
-                                {{ r.Name }}
+                                {{ r.RestaurantName }}
                               </h4>
                               <ul class="tags-all">
                                 <li v-if="r.City">
@@ -425,7 +424,6 @@
                   </div>
                 </div>
               </el-tab-pane>
-
               <el-tab-pane
                 name="hotel"
               >
@@ -502,7 +500,7 @@
                       <div class="row">
                         <div
                           v-for="h in hotelTotalPages"
-                          :key="h.ID"
+                          :key="h.HotelID"
                           class="col-xl-3 col-lg-4 col-md-6"
                         >
                           <div class="item">
@@ -536,7 +534,7 @@
                                 <p>Hotel</p>
                               </div>
                               <h4 class="name">
-                                {{ h.Name }}
+                                {{ h.HotelName }}
                               </h4>
                               <ul class="tags-all">
                                 <li v-if="h.City">
@@ -592,7 +590,6 @@
                 </div>
               </el-tab-pane>
             </el-tabs>
-
             <div
               v-if="searchResult === 0 && searchFailed === false && keyword === '' && selected === ''"
               class="content-wrap no-content"
@@ -607,7 +604,6 @@
                 </p>
               </div>
             </div>
-
             <div
               v-if="keyword !== '' && searchFailed === true && searchResult >= 3"
               class="content-wrap no-content"
@@ -624,9 +620,8 @@
           </div>
         </div>
       </div>
-
       <el-dialog
-        :title="currentItem.Name"
+        :title="currentItem.ScenicSpotName"
         :visible.sync="visibleScenicSpot"
         :destroy-on-close="true"
       >
@@ -674,9 +669,8 @@
           </ul>
         </div>
       </el-dialog>
-
       <el-dialog
-        :title="currentItem.Name"
+        :title="currentItem.RestaurantName"
         :visible.sync="visibleRestaurant"
         :destroy-on-close="true"
       >
@@ -739,9 +733,8 @@
           </ul>
         </div>
       </el-dialog>
-
       <el-dialog
-        :title="currentItem.Name"
+        :title="currentItem.HotelName"
         :visible.sync="visibleHotel"
         :destroy-on-close="true"
       >
@@ -1106,9 +1099,9 @@ export default {
         .then(res => {
           this.scenicSpotTotalData = res.data
           this.scenicSpotTotalData.forEach(item => {
-            item.Name = item.Name.replace(/_|ˍ/g, ' ')
+            item.ScenicSpotName = item.ScenicSpotName.replace(/_|ˍ/g, ' ')
           })
-          this.searchScenicSpotData = this.scenicSpotTotalData.filter(value => value.Name.match(this.keyword))
+          this.searchScenicSpotData = this.scenicSpotTotalData.filter(value => value.ScenicSpotName.match(this.keyword))
           if (this.searchScenicSpotData.length === 0) {
             this.scrollToContent()
             this.searchResult += 1
@@ -1138,7 +1131,7 @@ export default {
         .then(res => {
           this.scenicSpotTotalData = res.data
           this.scenicSpotTotalData.forEach(item => {
-            item.Name = item.Name.replace(/_|ˍ/g, ' ')
+            item.ScenicSpotName = item.ScenicSpotName.replace(/_|ˍ/g, ' ')
           })
           if (this.scenicSpotTotalData.length > 0) {
             this.getScenicSpotPages()
@@ -1160,9 +1153,9 @@ export default {
         .then(res => {
           this.restaurantTotalData = res.data
           this.restaurantTotalData.forEach(item => {
-            item.Name = item.Name.replace(/_|ˍ/g, ' ')
+            item.RestaurantName = item.RestaurantName.replace(/_|ˍ/g, ' ')
           })
-          this.searchRestaurantData = this.restaurantTotalData.filter(value => value.Name.match(this.keyword))
+          this.searchRestaurantData = this.restaurantTotalData.filter(value => value.RestaurantName.match(this.keyword))
           if (this.searchRestaurantData.length === 0) {
             this.scrollToContent()
             this.searchResult += 1
@@ -1192,7 +1185,7 @@ export default {
         .then(res => {
           this.restaurantTotalData = res.data
           this.restaurantTotalData.forEach(item => {
-            item.Name = item.Name.replace(/_|ˍ/g, ' ')
+            item.RestaurantName = item.RestaurantName.replace(/_|ˍ/g, ' ')
           })
           if (this.restaurantTotalData.length > 0) {
             this.getRestaurantPages()
@@ -1214,9 +1207,9 @@ export default {
         .then(res => {
           this.hotelTotalData = res.data
           this.hotelTotalData.forEach(item => {
-            item.Name = item.Name.replace(/_|ˍ/g, ' ')
+            item.HotelName = item.HotelName.replace(/_|ˍ/g, ' ')
           })
-          this.searchHotelData = this.hotelTotalData.filter(value => value.Name.match(this.keyword))
+          this.searchHotelData = this.hotelTotalData.filter(value => value.HotelName.match(this.keyword))
           if (this.searchHotelData.length === 0) {
             this.scrollToContent()
             this.searchResult += 1
@@ -1246,7 +1239,7 @@ export default {
         .then(res => {
           this.hotelTotalData = res.data
           this.hotelTotalData.forEach(item => {
-            item.Name = item.Name.replace(/_|ˍ/g, ' ')
+            item.HotelName = item.HotelName.replace(/_|ˍ/g, ' ')
           })
           if (this.hotelTotalData.length > 0) {
             this.getHotelPages()
