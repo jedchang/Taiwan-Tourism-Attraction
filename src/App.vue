@@ -13,7 +13,6 @@
         </div>
       </template>
     </loading>
-
     <section class="banner-section">
       <div class="dot-overlay" />
       <div class="pattern-layer" />
@@ -79,7 +78,6 @@
         </div>
       </div>
     </section>
-
     <section
       id="content"
       class="content-wrap"
@@ -167,71 +165,10 @@
                     <div
                       class="col-12"
                     >
-                      <div class="row">
-                        <div
-                          v-for="s in scenicSpotTotalPages"
-                          :key="s.ScenicSpotID"
-                          class="col-xl-3 col-lg-4 col-md-6"
-                        >
-                          <div class="item">
-                            <div class="thumb">
-                              <img
-                                v-if="!s.Picture.hasOwnProperty('PictureUrl1')"
-                                src="@/assets/images/no_picture_scenic_spot.jpg"
-                                alt="Picture"
-                              >
-                              <img
-                                v-else
-                                :src="s.Picture.PictureUrl1"
-                                :alt="s.Picture.PictureDescription1"
-                              >
-                              <button
-                                type="button"
-                                class="detail-btn"
-                                @click.prevent="openScenicSpot(s)"
-                              >
-                                <span class="material-icons">
-                                  visibility
-                                </span>
-                                <span>觀看詳情</span>
-                              </button>
-                            </div>
-                            <div class="content">
-                              <div class="category">
-                                <span class="material-icons">
-                                  camera_alt
-                                </span>
-                                <p>Scenic Spot</p>
-                              </div>
-                              <h4 class="name">
-                                {{ s.ScenicSpotName }}
-                              </h4>
-                              <ul class="tags-all">
-                                <li v-if="s.City">
-                                  <div class="tag">
-                                    {{ s.City }}
-                                  </div>
-                                </li>
-                                <li v-if="s.Class1">
-                                  <div class="tag">
-                                    {{ s.Class1 }}
-                                  </div>
-                                </li>
-                                <li v-if="s.Class2">
-                                  <div class="tag">
-                                    {{ s.Class2 }}
-                                  </div>
-                                </li>
-                                <li v-if="s.Class3">
-                                  <div class="tag">
-                                    {{ s.Class3 }}
-                                  </div>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <ScenicSpotContent
+                        :scenic-spot-total-pages="scenicSpotTotalPages"
+                        @update-current-item="openScenicSpot"
+                      />
                       <div
                         v-if="selected !== ''"
                         class="status"
@@ -337,61 +274,10 @@
                       </div>
                     </div>
                     <div class="col-12">
-                      <div class="row">
-                        <div
-                          v-for="r in restaurantTotalPages"
-                          :key="r.RestaurantID"
-                          class="col-xl-3 col-lg-4 col-md-6"
-                        >
-                          <div class="item">
-                            <div class="thumb">
-                              <img
-                                v-if="!r.Picture.hasOwnProperty('PictureUrl1')"
-                                src="@/assets/images/no_picture_restaurant.jpg"
-                                alt="Picture"
-                              >
-                              <img
-                                v-else
-                                :src="r.Picture.PictureUrl1"
-                                :alt="r.Picture.PictureDescription1"
-                              >
-                              <button
-                                type="button"
-                                class="detail-btn"
-                                @click.prevent="openRestaurant(r)"
-                              >
-                                <span class="material-icons">
-                                  visibility
-                                </span>
-                                <span>觀看詳情</span>
-                              </button>
-                            </div>
-                            <div class="content">
-                              <div class="category">
-                                <span class="material-icons">
-                                  restaurant
-                                </span>
-                                <p>Restaurant</p>
-                              </div>
-                              <h4 class="name">
-                                {{ r.RestaurantName }}
-                              </h4>
-                              <ul class="tags-all">
-                                <li v-if="r.City">
-                                  <div class="tag">
-                                    {{ r.City }}
-                                  </div>
-                                </li>
-                                <li v-if="r.Class">
-                                  <div class="tag">
-                                    {{ r.Class }}
-                                  </div>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <RestaurantContent
+                        :restaurant-total-pages="restaurantTotalPages"
+                        @update-current-item="openRestaurant"
+                      />
                       <div
                         v-if="selected !== ''"
                         class="status"
@@ -497,66 +383,10 @@
                       </div>
                     </div>
                     <div class="col-12">
-                      <div class="row">
-                        <div
-                          v-for="h in hotelTotalPages"
-                          :key="h.HotelID"
-                          class="col-xl-3 col-lg-4 col-md-6"
-                        >
-                          <div class="item">
-                            <div class="thumb">
-                              <img
-                                v-if="!h.Picture.hasOwnProperty('PictureUrl1')"
-                                src="@/assets/images/no_picture_hotel.jpg"
-                                alt="Picture"
-                              >
-                              <img
-                                v-else
-                                :src="h.Picture.PictureUrl1"
-                                :alt="h.Picture.PictureDescription1"
-                              >
-                              <button
-                                type="button"
-                                class="detail-btn"
-                                @click.prevent="openHotel(h)"
-                              >
-                                <span class="material-icons">
-                                  visibility
-                                </span>
-                                <span>觀看詳情</span>
-                              </button>
-                            </div>
-                            <div class="content">
-                              <div class="category">
-                                <span class="material-icons">
-                                  local_hotel
-                                </span>
-                                <p>Hotel</p>
-                              </div>
-                              <h4 class="name">
-                                {{ h.HotelName }}
-                              </h4>
-                              <ul class="tags-all">
-                                <li v-if="h.City">
-                                  <div class="tag">
-                                    {{ h.City }}
-                                  </div>
-                                </li>
-                                <li v-if="h.Class">
-                                  <div class="tag">
-                                    {{ h.Class }}
-                                  </div>
-                                </li>
-                                <li v-if="h.Grade">
-                                  <div class="tag">
-                                    {{ h.Grade }}
-                                  </div>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <HotelContent
+                        :hotel-total-pages="hotelTotalPages"
+                        @update-current-item="openHotel"
+                      />
                       <div
                         v-if="selected !== ''"
                         class="status"
@@ -818,9 +648,11 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import city from '@/data/city.json'
 import jsSHA from 'jssha'
+import ScenicSpotContent from '@/components/ScenicSpotContent'
+import RestaurantContent from '@/components/RestaurantContent'
+import HotelContent from '@/components/HotelContent'
 import Footer from '@/components/Footer'
 import ScrollTop from '@/components/ScrollTop'
 import LoadingLogo from '@/components/LoadingLogo'
@@ -829,6 +661,9 @@ import $ from 'jquery'
 export default {
   name: 'Home',
   components: {
+    ScenicSpotContent,
+    RestaurantContent,
+    HotelContent,
     Footer,
     ScrollTop,
     LoadingLogo
@@ -971,6 +806,7 @@ export default {
       this.isLoading = true
       this.scrollToTabs()
       this.scenicSpotCurrentPage = currentPage
+      this.searchScenicSpotCurrentPage = currentPage
       setTimeout(() => {
         this.getScenicSpotPages()
         this.isLoading = false
@@ -980,6 +816,7 @@ export default {
       this.isLoading = true
       this.scrollToTabs()
       this.restaurantCurrentPage = currentPage
+      this.searchRestaurantCurrentPage = currentPage
       setTimeout(() => {
         this.getRestaurantPages()
         this.isLoading = false
@@ -989,6 +826,7 @@ export default {
       this.isLoading = true
       this.scrollToTabs()
       this.hotelCurrentPage = currentPage
+      this.searchHotelCurrentPage = currentPage
       setTimeout(() => {
         this.getHotelPages()
         this.isLoading = false
@@ -1052,6 +890,13 @@ export default {
       }
     },
     getData () {
+      this.pageValue = true
+      this.scenicSpotTotalData = []
+      this.searchScenicSpotData = []
+      this.restaurantTotalData = []
+      this.searchRestaurantData = []
+      this.hotelTotalData = []
+      this.searchHotelData = []
       if (this.selected !== '') {
         this.getScenicSpotData()
         this.getRestaurantData()
@@ -1103,6 +948,7 @@ export default {
           })
           this.searchScenicSpotData = this.scenicSpotTotalData.filter(value => value.ScenicSpotName.match(this.keyword))
           if (this.searchScenicSpotData.length === 0) {
+            console.log('this.searchScenicSpotData.length === 0')
             this.scrollToContent()
             this.searchResult += 1
             this.searchFailed = true
