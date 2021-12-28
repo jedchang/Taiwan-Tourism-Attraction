@@ -395,14 +395,14 @@
 
 .content-wrap {
   padding-top: 15px;
-  padding-bottom: 50px;
+  padding-bottom: 30px;
   @include small {
     padding-top: 5px;
-    padding-bottom: 50px;
+    padding-bottom: 40px;
   }
   @include extraSmall {
     padding-top: 0;
-    padding-bottom: 45px;
+    padding-bottom: 40px;
   }
   .txt-info {
     display: flex;
@@ -567,8 +567,29 @@
     @include extraSmall {
       margin: 0px 0 0 0;
     }
+    .status {
+      margin: 30px 0 10px;
+    }
     .material-icons {
       font-size: 62px;
+    }
+  }
+
+  .el-pagination {
+    &.is-background {
+      .el-pager {
+        li:not(.disabled) {
+          &:hover {
+            color: $primaryColor;
+          }
+          &.active {
+            background-color: $primaryColor;
+            &:hover {
+              color: #fff;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -627,21 +648,6 @@
         font-size: 20px;
         font-weight: 600;
         color: $secondaryColor;
-      }
-      .show {
-        margin-right: 12px;
-        padding-right: 12px;
-        border-right: 1px solid #c9c9c9;
-        @include extraSmall {
-          margin-right: 0;
-          padding-right: 0;
-          border-right: none;
-          font-size: 16px;
-          margin-bottom: 7px;
-          border-bottom: 1px dashed #c3c3c3;
-          padding-bottom: 7px;
-          width: 100%;
-        }
       }
       .counter {
         @include extraSmall {
@@ -1045,63 +1051,6 @@
           border-radius: 4px;
         }
       }
-    }
-  }
-
-  .load-more-btn {
-    margin-top: 50px;
-    padding: 12px 45px;
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
-    font-size: 18px;
-    line-height: 25px;
-    font-weight: 600;
-    color: $textDarkColor;
-    border: 1px solid $textDarkColor;
-    text-align: center;
-    border-radius: 4px;
-    z-index: 1;
-    width: 192px;
-    transition: $setTransition;
-    @include extraSmall {
-      margin-top: 40px;
-      margin-bottom: 55px;
-      width: 100%;
-      padding: 13px 45px;
-      font-size: 16px;
-    }
-    &:hover {
-      color: #ffffff;
-      box-shadow: 0px 15px 25px 0px rgba(255, 124, 91, 0.3);
-      border-color: $primaryColor;
-      &:before {
-        top: -40%;
-      }
-      @include extraSmall {
-        color: $textDarkColor;
-        box-shadow: none;
-        border: 1px solid $textDarkColor;
-      }
-    }
-    &:before {
-      transition-duration: 800ms;
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      content: '';
-      top: 110%;
-      left: 50%;
-      background: $primaryColor;
-      transform: translateX(-50%);
-      border-radius: 50%;
-      z-index: -1;
-      @include extraSmall {
-        background: transparent;
-      }
-    }
-    .svg-inline--fa {
-      margin-right: 5px;
     }
   }
 }

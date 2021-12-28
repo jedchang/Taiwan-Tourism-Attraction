@@ -33,7 +33,7 @@
                     Your Travel
                   </h2>
                 </div>
-                <p>探索您的生活，旅行您想去的地方，立即開始行動吧！</p>
+                <p>探索您的生活，旅行您想去的地方，立即開始行動吧!</p>
               </div>
               <div class="search-inner">
                 <select
@@ -79,6 +79,7 @@
         </div>
       </div>
     </section>
+
     <section
       id="content"
       class="content-wrap"
@@ -87,7 +88,7 @@
         <div class="row">
           <div class="col-12">
             <el-tabs
-              v-if="scenicSpotData.length !== 0 || restaurantData.length !== 0 || hotelData.length !== 0"
+              v-if="scenicSpotTotalData.length !== 0 || restaurantTotalData.length !== 0 || hotelTotalData.length !== 0"
               v-model="activeName"
               type="card"
             >
@@ -121,9 +122,6 @@
                           <span class="material-icons">
                             chevron_right
                           </span>
-                          <p class="show">
-                            目前列出 <span>{{ scenicSpotData.length }}</span> 處景點
-                          </p>
                           <p class="counter">
                             全部共有 <span>{{ scenicSpotTotalData.length }}</span> 處景點
                           </p>
@@ -160,12 +158,6 @@
                           <span class="material-icons">
                             chevron_right
                           </span>
-                          <p
-                            v-if="searchScenicSpotData.length !== 0"
-                            class="show"
-                          >
-                            目前列出 <span>{{ scenicSpotData.length }}</span> 處景點
-                          </p>
                           <p class="counter">
                             搜尋共有 <span>{{ searchScenicSpotData.length }}</span> 處景點
                           </p>
@@ -177,7 +169,7 @@
                     >
                       <div class="row">
                         <div
-                          v-for="s in scenicSpotData"
+                          v-for="s in scenicSpotTotalPages"
                           :key="s.ID"
                           class="col-xl-3 col-lg-4 col-md-6"
                         >
@@ -244,32 +236,35 @@
                         v-if="selected !== ''"
                         class="status"
                       >
-                        <a
-                          v-if="scenicSpotData.length < scenicSpotTotalData.length"
-                          href="#"
-                          class="load-more-btn"
-                          @click.prevent="loadMoreScenicSpot()"
-                        >
-                          <span>讀取更多</span>
-                        </a>
+                        <el-pagination
+                          background
+                          layout="prev, pager, next"
+                          :hide-on-single-page="pageValue"
+                          :current-page="scenicSpotCurrentPage"
+                          :page-size="scenicSpotPagesize"
+                          :total="scenicSpotTotalData.length"
+                          @current-change="scenicSpotCurrentChange"
+                        />
                       </div>
                       <div
                         v-if="keyword !== ''"
                         class="status"
                       >
-                        <a
-                          v-if="scenicSpotData.length < searchScenicSpotData.length"
-                          href="#"
-                          class="load-more-btn"
-                          @click.prevent="loadMoreScenicSpot()"
-                        >
-                          <span>讀取更多</span>
-                        </a>
+                        <el-pagination
+                          background
+                          layout="prev, pager, next"
+                          :hide-on-single-page="pageValue"
+                          :current-page="searchScenicSpotCurrentPage"
+                          :page-size="searchScenicSpotPagesize"
+                          :total="searchScenicSpotData.length"
+                          @current-change="scenicSpotCurrentChange"
+                        />
                       </div>
                     </div>
                   </div>
                 </div>
               </el-tab-pane>
+
               <el-tab-pane
                 name="restaurant"
               >
@@ -300,9 +295,6 @@
                           <span class="material-icons">
                             chevron_right
                           </span>
-                          <p class="show">
-                            目前列出 <span>{{ restaurantData.length }}</span> 間餐廳
-                          </p>
                           <p class="counter">
                             全部共有 <span>{{ restaurantTotalData.length }}</span> 間餐廳
                           </p>
@@ -339,12 +331,6 @@
                           <span class="material-icons">
                             chevron_right
                           </span>
-                          <p
-                            v-if="searchRestaurantData.length !== 0"
-                            class="show"
-                          >
-                            目前列出 <span>{{ restaurantData.length }}</span> 間餐廳
-                          </p>
                           <p class="counter">
                             搜尋共有 <span>{{ searchRestaurantData.length }}</span> 間餐廳
                           </p>
@@ -354,7 +340,7 @@
                     <div class="col-12">
                       <div class="row">
                         <div
-                          v-for="r in restaurantData"
+                          v-for="r in restaurantTotalPages"
                           :key="r.ID"
                           class="col-xl-3 col-lg-4 col-md-6"
                         >
@@ -411,32 +397,35 @@
                         v-if="selected !== ''"
                         class="status"
                       >
-                        <a
-                          v-if="restaurantData.length < restaurantTotalData.length"
-                          href="#"
-                          class="load-more-btn"
-                          @click.prevent="loadMoreRestaurant()"
-                        >
-                          <span>讀取更多</span>
-                        </a>
+                        <el-pagination
+                          background
+                          layout="prev, pager, next"
+                          :hide-on-single-page="pageValue"
+                          :current-page="restaurantCurrentPage"
+                          :page-size="restaurantPagesize"
+                          :total="restaurantTotalData.length"
+                          @current-change="restaurantCurrentChange"
+                        />
                       </div>
                       <div
                         v-if="keyword !== ''"
                         class="status"
                       >
-                        <a
-                          v-if="restaurantData.length < searchRestaurantData.length"
-                          href="#"
-                          class="load-more-btn"
-                          @click.prevent="loadMoreRestaurant()"
-                        >
-                          <span>讀取更多</span>
-                        </a>
+                        <el-pagination
+                          background
+                          layout="prev, pager, next"
+                          :hide-on-single-page="pageValue"
+                          :current-page="searchRestaurantCurrentPage"
+                          :page-size="searchRestaurantPagesize"
+                          :total="searchRestaurantData.length"
+                          @current-change="restaurantCurrentChange"
+                        />
                       </div>
                     </div>
                   </div>
                 </div>
               </el-tab-pane>
+
               <el-tab-pane
                 name="hotel"
               >
@@ -467,9 +456,6 @@
                           <span class="material-icons">
                             chevron_right
                           </span>
-                          <p class="show">
-                            目前列出 <span>{{ hotelData.length }}</span> 間旅宿
-                          </p>
                           <p class="counter">
                             全部共有 <span>{{ hotelTotalData.length }}</span> 間旅宿
                           </p>
@@ -506,12 +492,6 @@
                           <span class="material-icons">
                             chevron_right
                           </span>
-                          <p
-                            v-if="searchHotelData.length !== 0"
-                            class="show"
-                          >
-                            目前列出 <span>{{ hotelData.length }}</span> 間旅宿
-                          </p>
                           <p class="counter">
                             搜尋共有 <span>{{ searchHotelData.length }}</span> 間旅宿
                           </p>
@@ -521,7 +501,7 @@
                     <div class="col-12">
                       <div class="row">
                         <div
-                          v-for="h in hotelData"
+                          v-for="h in hotelTotalPages"
                           :key="h.ID"
                           class="col-xl-3 col-lg-4 col-md-6"
                         >
@@ -583,33 +563,36 @@
                         v-if="selected !== ''"
                         class="status"
                       >
-                        <a
-                          v-if="hotelData.length < hotelTotalData.length"
-                          href="#"
-                          class="load-more-btn"
-                          @click.prevent="loadMoreHotel()"
-                        >
-                          <span>讀取更多</span>
-                        </a>
+                        <el-pagination
+                          background
+                          layout="prev, pager, next"
+                          :hide-on-single-page="pageValue"
+                          :current-page="hotelCurrentPage"
+                          :page-size="hotelPagesize"
+                          :total="hotelTotalData.length"
+                          @current-change="hotelCurrentChange"
+                        />
                       </div>
                       <div
                         v-if="keyword !== ''"
                         class="status"
                       >
-                        <a
-                          v-if="hotelData.length < searchHotelData.length"
-                          href="#"
-                          class="load-more-btn"
-                          @click.prevent="loadMoreHotel()"
-                        >
-                          <span>讀取更多</span>
-                        </a>
+                        <el-pagination
+                          background
+                          layout="prev, pager, next"
+                          :hide-on-single-page="pageValue"
+                          :current-page="searchHotelCurrentPage"
+                          :page-size="searchHotelPagesize"
+                          :total="searchHotelData.length"
+                          @current-change="hotelCurrentChange"
+                        />
                       </div>
                     </div>
                   </div>
                 </div>
               </el-tab-pane>
             </el-tabs>
+
             <div
               v-if="searchResult === 0 && searchFailed === false && keyword === '' && selected === ''"
               class="content-wrap no-content"
@@ -624,6 +607,7 @@
                 </p>
               </div>
             </div>
+
             <div
               v-if="keyword !== '' && searchFailed === true && searchResult >= 3"
               class="content-wrap no-content"
@@ -640,6 +624,7 @@
           </div>
         </div>
       </div>
+
       <el-dialog
         :title="currentItem.Name"
         :visible.sync="visibleScenicSpot"
@@ -689,6 +674,7 @@
           </ul>
         </div>
       </el-dialog>
+
       <el-dialog
         :title="currentItem.Name"
         :visible.sync="visibleRestaurant"
@@ -753,6 +739,7 @@
           </ul>
         </div>
       </el-dialog>
+
       <el-dialog
         :title="currentItem.Name"
         :visible.sync="visibleHotel"
@@ -829,7 +816,11 @@
       </el-dialog>
     </section>
     <Footer />
-    <ScrollTop />
+    <ScrollTop
+      :scenic-spot-total-data="scenicSpotTotalData"
+      :restaurant-total-data="restaurantTotalData"
+      :hotel-total-data="hotelTotalData"
+    />
   </div>
 </template>
 
@@ -861,17 +852,14 @@ export default {
       searchScenicSpotData: [],
       scenicSpotTotalData: [],
       scenicSpotData: [],
-      qtyScenicSpot: 30,
       resultRestaurant: false,
       searchRestaurantData: [],
       restaurantTotalData: [],
       restaurantData: [],
-      qtyRestaurant: 30,
       resultHotel: false,
       searchHotelData: [],
       hotelTotalData: [],
       hotelData: [],
-      qtyHotel: 30,
       activeName: 'scenicSpot',
       visibleScenicSpot: false,
       visibleRestaurant: false,
@@ -887,7 +875,26 @@ export default {
           PositionLat: '',
           PositionLon: ''
         }
-      }
+      },
+      pageValue: false,
+      scenicSpotCurrentPage: 1,
+      scenicSpotPagesize: 30,
+      scenicSpotTotalPages: [],
+      searchScenicSpotCurrentPage: 1,
+      searchScenicSpotPagesize: 30,
+      searchScenicSpotTotalPages: [],
+      restaurantCurrentPage: 1,
+      restaurantPagesize: 30,
+      restaurantTotalPages: [],
+      searchRestaurantCurrentPage: 1,
+      searchRestaurantPagesize: 30,
+      searchRestaurantTotalPages: [],
+      hotelCurrentPage: 1,
+      hotelPagesize: 30,
+      hotelTotalPages: [],
+      searchHotelCurrentPage: 1,
+      searchHotelPagesize: 30,
+      searchHotelTotalPages: []
     }
   },
   computed: {
@@ -902,9 +909,25 @@ export default {
     selected () {
       this.searchResult = 0
       this.searchFailed = false
-      this.qtyScenicSpot = 30
-      this.qtyRestaurant = 30
-      this.qtyHotel = 30
+      this.pageValue = false
+      this.scenicSpotCurrentPage = 1
+      this.scenicSpotPagesize = 30
+      this.scenicSpotTotalPages = []
+      this.searchScenicSpotCurrentPage = 1
+      this.searchScenicSpotPagesize = 30
+      this.searchScenicSpotTotalPages = []
+      this.restaurantCurrentPage = 1
+      this.restaurantPagesize = 30
+      this.restaurantTotalPages = []
+      this.searchRestaurantCurrentPage = 1
+      this.searchRestaurantPagesize = 30
+      this.searchRestaurantTotalPages = []
+      this.hotelCurrentPage = 1
+      this.hotelPagesize = 30
+      this.hotelTotalPages = []
+      this.searchHotelCurrentPage = 1
+      this.searchHotelPagesize = 30
+      this.searchHotelTotalPages = []
       this.activeName = 'scenicSpot'
       this.scenicSpotData = []
       this.scenicSpotTotalData = []
@@ -916,22 +939,32 @@ export default {
     keyword () {
       this.searchResult = 0
       this.searchFailed = false
-      this.qtyScenicSpot = 30
-      this.qtyRestaurant = 30
-      this.qtyHotel = 30
+      this.pageValue = false
+      this.scenicSpotCurrentPage = 1
+      this.scenicSpotPagesize = 30
+      this.scenicSpotTotalPages = []
+      this.searchScenicSpotCurrentPage = 1
+      this.searchScenicSpotPagesize = 30
+      this.searchScenicSpotTotalPages = []
+      this.restaurantCurrentPage = 1
+      this.restaurantPagesize = 30
+      this.restaurantTotalPages = []
+      this.searchRestaurantCurrentPage = 1
+      this.searchRestaurantPagesize = 30
+      this.searchRestaurantTotalPages = []
+      this.hotelCurrentPage = 1
+      this.hotelPagesize = 30
+      this.hotelTotalPages = []
+      this.searchHotelCurrentPage = 1
+      this.searchHotelPagesize = 30
+      this.searchHotelTotalPages = []
       this.activeName = 'scenicSpot'
-      this.resultScenicSpot = false
       this.scenicSpotData = []
       this.scenicSpotTotalData = []
-      this.searchScenicSpotData = []
-      this.resultRestaurant = false
       this.restaurantData = []
       this.restaurantTotalData = []
-      this.searchRestaurantData = []
-      this.resultHotel = false
       this.hotelData = []
       this.hotelTotalData = []
-      this.searchHotelData = []
     }
   },
   mounted () {
@@ -941,6 +974,90 @@ export default {
     }, 2000)
   },
   methods: {
+    scenicSpotCurrentChange (currentPage) {
+      this.isLoading = true
+      this.scrollToTabs()
+      this.scenicSpotCurrentPage = currentPage
+      setTimeout(() => {
+        this.getScenicSpotPages()
+        this.isLoading = false
+      }, 1000)
+    },
+    restaurantCurrentChange (currentPage) {
+      this.isLoading = true
+      this.scrollToTabs()
+      this.restaurantCurrentPage = currentPage
+      setTimeout(() => {
+        this.getRestaurantPages()
+        this.isLoading = false
+      }, 1000)
+    },
+    hotelCurrentChange (currentPage) {
+      this.isLoading = true
+      this.scrollToTabs()
+      this.hotelCurrentPage = currentPage
+      setTimeout(() => {
+        this.getHotelPages()
+        this.isLoading = false
+      }, 1000)
+    },
+    getScenicSpotPages () {
+      if (this.selected !== '') {
+        const start = (this.scenicSpotCurrentPage - 1) * this.scenicSpotPagesize
+        let end = start + this.scenicSpotPagesize
+        if (this.scenicSpotTotalData.length <= 30) {
+          end = this.scenicSpotTotalData.length
+          this.pageValue = true
+        }
+        this.scenicSpotTotalPages = this.scenicSpotTotalData.slice(start, end)
+      } else if (this.keyword !== '') {
+        const start = (this.searchScenicSpotCurrentPage - 1) * this.searchScenicSpotPagesize
+        let end = start + this.searchScenicSpotPagesize
+        if (this.searchScenicSpotData.length <= 30) {
+          end = this.searchScenicSpotData.length
+          this.pageValue = true
+        }
+        this.scenicSpotTotalPages = this.searchScenicSpotData.slice(start, end)
+      }
+    },
+    getRestaurantPages () {
+      if (this.selected !== '') {
+        const start = (this.restaurantCurrentPage - 1) * this.restaurantPagesize
+        let end = start + this.restaurantPagesize
+        if (this.restaurantTotalData.length <= 30) {
+          end = this.restaurantTotalData.length
+          this.pageValue = true
+        }
+        this.restaurantTotalPages = this.restaurantTotalData.slice(start, end)
+      } else if (this.keyword !== '') {
+        const start = (this.searchRestaurantCurrentPage - 1) * this.searchRestaurantPagesize
+        let end = start + this.searchRestaurantPagesize
+        if (this.searchRestaurantData.length <= 30) {
+          end = this.searchRestaurantData.length
+          this.pageValue = true
+        }
+        this.restaurantTotalPages = this.searchRestaurantData.slice(start, end)
+      }
+    },
+    getHotelPages () {
+      if (this.selected !== '') {
+        const start = (this.hotelCurrentPage - 1) * this.hotelPagesize
+        let end = start + this.hotelPagesize
+        if (this.hotelTotalData.length <= 30) {
+          end = this.hotelTotalData.length
+          this.pageValue = true
+        }
+        this.hotelTotalPages = this.hotelTotalData.slice(start, end)
+      } else if (this.keyword !== '') {
+        const start = (this.searchHotelCurrentPage - 1) * this.searchHotelPagesize
+        let end = start + this.searchHotelPagesize
+        if (this.searchHotelData.length <= 30) {
+          end = this.searchHotelData.length
+          this.pageValue = true
+        }
+        this.hotelTotalPages = this.searchHotelData.slice(start, end)
+      }
+    },
     getData () {
       if (this.selected !== '') {
         this.getScenicSpotData()
@@ -963,6 +1080,10 @@ export default {
         scrollTop: targetTop
       }, 600)
     },
+    scrollToTabs () {
+      const targetTop = $('#content').offset().top
+      window.scrollTo({ top: targetTop, behavior: 'smooth' })
+    },
     openScenicSpot (item) {
       this.currentItem = item
       this.visibleScenicSpot = true
@@ -974,21 +1095,6 @@ export default {
     openHotel (item) {
       this.currentItem = item
       this.visibleHotel = true
-    },
-    loadMoreScenicSpot () {
-      this.qtyScenicSpot = this.qtyScenicSpot + 30
-      if (this.selected) this.getScenicSpotData()
-      if (this.keyword) this.getSearchScenicSpotData()
-    },
-    loadMoreRestaurant () {
-      this.qtyRestaurant = this.qtyRestaurant + 30
-      if (this.selected) this.getRestaurantData()
-      if (this.keyword) this.getSearchRestaurantData()
-    },
-    loadMoreHotel () {
-      this.qtyHotel = this.qtyHotel + 30
-      if (this.selected) this.getHotelData()
-      if (this.keyword) this.getSearchHotelData()
     },
     getSearchScenicSpotData () {
       this.isLoading = true
@@ -1010,12 +1116,11 @@ export default {
             this.resultScenicSpot = true
             this.isLoading = false
           } else {
+            this.scenicSpotData = this.searchScenicSpotData
+            this.getScenicSpotPages()
+            this.scrollToContent()
             this.searchFailed = false
             this.isLoading = false
-            this.scenicSpotData = this.searchScenicSpotData.slice(0, this.qtyScenicSpot)
-            if (this.scenicSpotData.length <= 30) {
-              this.scrollToContent()
-            }
           }
         })
         .catch(err => {
@@ -1036,12 +1141,10 @@ export default {
             item.Name = item.Name.replace(/_|ˍ/g, ' ')
           })
           if (this.scenicSpotTotalData.length > 0) {
+            this.getScenicSpotPages()
             this.isLoading = false
           }
-          this.scenicSpotData = this.scenicSpotTotalData.slice(0, this.qtyScenicSpot)
-          if (this.scenicSpotData.length <= 30) {
-            this.scrollToContent()
-          }
+          this.scrollToContent()
         })
         .catch(err => {
           console.log(err.response)
@@ -1064,15 +1167,14 @@ export default {
             this.scrollToContent()
             this.searchResult += 1
             this.searchFailed = true
-            this.resultRestaurant = TextTrackCueList
+            this.resultRestaurant = true
             this.isLoading = false
           } else {
+            this.restaurantData = this.searchRestaurantData
+            this.getRestaurantPages()
+            this.scrollToContent()
             this.searchFailed = false
             this.isLoading = false
-            this.restaurantData = this.searchRestaurantData.slice(0, this.qtyRestaurant)
-            if (this.restaurantData.length <= 30) {
-              this.scrollToContent()
-            }
           }
         })
         .catch(err => {
@@ -1093,12 +1195,10 @@ export default {
             item.Name = item.Name.replace(/_|ˍ/g, ' ')
           })
           if (this.restaurantTotalData.length > 0) {
+            this.getRestaurantPages()
             this.isLoading = false
           }
-          this.restaurantData = this.restaurantTotalData.slice(0, this.qtyRestaurant)
-          if (this.restaurantData.length <= 30) {
-            this.scrollToContent()
-          }
+          this.scrollToContent()
         })
         .catch(err => {
           console.log(err.response)
@@ -1124,12 +1224,11 @@ export default {
             this.resultHotel = true
             this.isLoading = false
           } else {
+            this.hotelData = this.searchHotelData
+            this.getHotelPages()
+            this.scrollToContent()
             this.searchFailed = false
             this.isLoading = false
-            this.hotelData = this.searchHotelData.slice(0, this.qtyHotel)
-            if (this.hotelData.length <= 30) {
-              this.scrollToContent()
-            }
           }
         })
         .catch(err => {
@@ -1150,12 +1249,10 @@ export default {
             item.Name = item.Name.replace(/_|ˍ/g, ' ')
           })
           if (this.hotelTotalData.length > 0) {
+            this.getHotelPages()
             this.isLoading = false
           }
-          this.hotelData = this.hotelTotalData.slice(0, this.qtyHotel)
-          if (this.hotelData.length <= 30) {
-            this.scrollToContent()
-          }
+          this.scrollToContent()
         })
         .catch(err => {
           console.log(err.response)

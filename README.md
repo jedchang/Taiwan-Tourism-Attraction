@@ -34,7 +34,7 @@ https://jedchang.github.io/Taiwan-Tourism-Attraction/
 - [x] 各地區餐飲列表
 - [x] 各地區旅宿列表
 - [x] RWD 版面樣式
-- [x] 讀取更多功能
+- [x] 分頁功能
 - [x] 搜尋關鍵字功能
 
 ## Remark

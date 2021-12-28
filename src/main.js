@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import { Tabs, TabPane, Dialog, Button } from 'element-ui'
+import { Tabs, TabPane, Dialog, Button, Pagination } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
 
@@ -26,6 +26,7 @@ Vue.use(Tabs)
 Vue.use(TabPane)
 Vue.use(Dialog)
 Vue.use(Button)
+Vue.use(Pagination)
 
 new Vue({
   render: h => h(App)
