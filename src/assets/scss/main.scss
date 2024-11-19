@@ -17,6 +17,7 @@
     text-decoration: none;
   }
 
+  // loading
   .vld-icon {
     display: flex;
     justify-content: center;
@@ -35,6 +36,7 @@
     opacity: 0.8;
   }
 
+  // loading style
   .spinner {
     margin: 15px auto 0;
     width: 60px;
@@ -64,6 +66,7 @@
     animation-delay: -0.16s;
   }
 
+  // banner
   .banner-section {
     position: relative;
     padding: 216px 0 270px 0;
@@ -483,6 +486,7 @@
     }
   }
 
+  // custom el-tabs
   .el-tabs {
     margin-top: 20px;
     .el-tabs__header {
@@ -581,6 +585,7 @@
     }
   }
 
+  // pagination
   .el-pagination {
     margin-top: 60px;
     padding: 0;
@@ -812,8 +817,13 @@
       }
     }
     &.result-selected {
-      width: 100%;
-      max-width: 700px;
+      width: 1000px;
+      @include large {
+        width: 900px;
+      }
+      @include medium {
+        width: 660px;
+      }
       @include small {
         width: 100%;
       }
@@ -850,6 +860,12 @@
             margin-left: 0;
           }
           @include extraSmall {
+            margin-left: 5px;
+          }
+          &.title {
+            font-size: 14px;
+            font-weight: 600;
+            color: $textColor;
             margin-left: 5px;
           }
         }
@@ -1017,6 +1033,7 @@
           color: $secondaryColor;
         }
         .website {
+          // 超連結只要一行，超出就顯示 ...
           display: inline-block;
           overflow: hidden;
           text-overflow: ellipsis;

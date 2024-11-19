@@ -7,16 +7,20 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
+  "engines": {
+    "node": ">=14.17.5"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/vue-fontawesome": "^2.0.6",
+    "@vue/runtime-dom": "^3.5.13",
     "axios": "^0.23.0",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.6",
     "jquery": "^3.6.0",
-    "jssha": "^3.2.0",
+    "qs": "^6.13.1",
     "vue": "^2.6.11",
     "vue-axios": "^3.3.7",
     "vue-loading-overlay": "^3.0.1"

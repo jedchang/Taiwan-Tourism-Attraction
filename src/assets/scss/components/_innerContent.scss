@@ -97,8 +97,10 @@
     img {
       display: block;
       width: 100%;
+      // max-width: 100%;
       height: auto;
-      min-height: 203px;
+      // height: 100%; // 設 auto 無法置中
+      min-height: 203px; // 有些圖片超高
       object-fit: cover;
       object-position: center;
       transition: $setTransition;
@@ -232,7 +234,7 @@
     .name {
       font-size: 22px;
       font-weight: 600;
-      height: 55px;
+      height: 55px; // 兩行標題高度
       color: $textDarkColor;
       margin-bottom: 20px;
       padding-bottom: 5px;

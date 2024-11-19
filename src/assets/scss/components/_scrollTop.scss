@@ -5,6 +5,7 @@
   @include extraSmall {
     bottom: 0;
   }
+  // copyright 會變兩行高
   @media (max-width: 447px) {
     bottom: 16px;
   }

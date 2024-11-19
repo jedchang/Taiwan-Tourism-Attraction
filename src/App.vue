@@ -13,6 +13,7 @@
         </div>
       </template>
     </loading>
+
     <section class="banner-section">
       <div class="dot-overlay" />
       <div class="pattern-layer" />
@@ -78,6 +79,7 @@
         </div>
       </div>
     </section>
+
     <section
       id="content"
       class="content-wrap"
@@ -90,6 +92,7 @@
               v-model="activeName"
               type="card"
             >
+              <!-- 風景區 -->
               <el-tab-pane
                 name="scenicSpot"
               >
@@ -105,6 +108,7 @@
                 <div class="tab-content">
                   <div class="row">
                     <div class="col-12">
+                      <!-- 選擇城市顯示結果 -->
                       <div
                         v-if="selected"
                         class="result-info result-selected"
@@ -113,7 +117,7 @@
                           <span class="material-icons">
                             chevron_right
                           </span>
-                          探索城市
+                          <span class="title">探索城市</span>
                           <span>{{ nowCityName[0].CityName }}</span>
                         </p>
                         <div class="display">
@@ -125,6 +129,7 @@
                           </p>
                         </div>
                       </div>
+                      <!-- 關鍵字查詢顯示結果 -->
                       <div
                         v-if="keyword"
                         class="result-info result-keyword"
@@ -169,6 +174,7 @@
                         :scenic-spot-total-pages="scenicSpotTotalPages"
                         @update-current-item="openScenicSpot"
                       />
+                      <!-- selected 分頁 -->
                       <div
                         v-if="selected !== ''"
                         class="status"
@@ -183,6 +189,7 @@
                           @current-change="scenicSpotCurrentChange"
                         />
                       </div>
+                      <!-- keyword 分頁 -->
                       <div
                         v-if="keyword !== ''"
                         class="status"
@@ -201,6 +208,8 @@
                   </div>
                 </div>
               </el-tab-pane>
+
+              <!-- 餐飲 -->
               <el-tab-pane
                 name="restaurant"
               >
@@ -216,6 +225,7 @@
                 <div class="tab-content">
                   <div class="row">
                     <div class="col-12">
+                      <!-- 選擇城市顯示結果 -->
                       <div
                         v-if="selected"
                         class="result-info result-selected"
@@ -224,7 +234,7 @@
                           <span class="material-icons">
                             chevron_right
                           </span>
-                          探索城市
+                          <span class="title">探索城市</span>
                           <span>{{ nowCityName[0].CityName }}</span>
                         </p>
                         <div class="display">
@@ -236,6 +246,7 @@
                           </p>
                         </div>
                       </div>
+                      <!-- 關鍵字查詢顯示結果 -->
                       <div
                         v-if="keyword"
                         class="result-info result-keyword"
@@ -278,6 +289,7 @@
                         :restaurant-total-pages="restaurantTotalPages"
                         @update-current-item="openRestaurant"
                       />
+                      <!-- selected 分頁 -->
                       <div
                         v-if="selected !== ''"
                         class="status"
@@ -292,6 +304,7 @@
                           @current-change="restaurantCurrentChange"
                         />
                       </div>
+                      <!-- keyword 分頁 -->
                       <div
                         v-if="keyword !== ''"
                         class="status"
@@ -310,6 +323,8 @@
                   </div>
                 </div>
               </el-tab-pane>
+
+              <!-- 旅宿 -->
               <el-tab-pane
                 name="hotel"
               >
@@ -325,6 +340,7 @@
                 <div class="tab-content">
                   <div class="row">
                     <div class="col-12">
+                      <!-- 選擇城市顯示結果 -->
                       <div
                         v-if="selected"
                         class="result-info result-selected"
@@ -333,7 +349,7 @@
                           <span class="material-icons">
                             chevron_right
                           </span>
-                          探索城市
+                          <span class="title">探索城市</span>
                           <span>{{ nowCityName[0].CityName }}</span>
                         </p>
                         <div class="display">
@@ -345,6 +361,7 @@
                           </p>
                         </div>
                       </div>
+                      <!-- 關鍵字查詢顯示結果 -->
                       <div
                         v-if="keyword"
                         class="result-info result-keyword"
@@ -387,6 +404,7 @@
                         :hotel-total-pages="hotelTotalPages"
                         @update-current-item="openHotel"
                       />
+                      <!-- selected 分頁 -->
                       <div
                         v-if="selected !== ''"
                         class="status"
@@ -401,6 +419,7 @@
                           @current-change="hotelCurrentChange"
                         />
                       </div>
+                      <!-- keyword 分頁 -->
                       <div
                         v-if="keyword !== ''"
                         class="status"
@@ -420,6 +439,8 @@
                 </div>
               </el-tab-pane>
             </el-tabs>
+
+            <!-- 都沒有選擇城市/關鍵字時顯示 -->
             <div
               v-if="searchResult === 0 && searchFailed === false && keyword === '' && selected === ''"
               class="content-wrap no-content"
@@ -434,6 +455,8 @@
                 </p>
               </div>
             </div>
+
+            <!-- 找不到關鍵字資料 -->
             <div
               v-if="keyword !== '' && searchFailed === true && searchResult >= 3"
               class="content-wrap no-content"
@@ -450,6 +473,7 @@
           </div>
         </div>
       </div>
+      <!-- dialog scenicSpot -->
       <el-dialog
         :title="currentItem.ScenicSpotName"
         :visible.sync="visibleScenicSpot"
@@ -499,6 +523,7 @@
           </ul>
         </div>
       </el-dialog>
+      <!-- dialog restaurant -->
       <el-dialog
         :title="currentItem.RestaurantName"
         :visible.sync="visibleRestaurant"
@@ -563,6 +588,7 @@
           </ul>
         </div>
       </el-dialog>
+      <!-- dialog hotel -->
       <el-dialog
         :title="currentItem.HotelName"
         :visible.sync="visibleHotel"
@@ -648,8 +674,8 @@
 </template>
 
 <script>
+// @ is an alias to /src
 import city from '@/data/city.json'
-import jsSHA from 'jssha'
 import ScenicSpotContent from '@/components/ScenicSpotContent'
 import RestaurantContent from '@/components/RestaurantContent'
 import HotelContent from '@/components/HotelContent'
@@ -673,9 +699,9 @@ export default {
       isLoading: false,
       searchFailed: false,
       cityData: city,
-      selected: '',
+      selected: '', // 不能設為 null，不然 option 預設內容不會顯示
       keyword: '',
-      searchResult: 0,
+      searchResult: 0, // 判斷找不到資料 (景點找不到+1、餐廳找不到+1、旅宿找不到+1)
       resultScenicSpot: false,
       searchScenicSpotData: [],
       scenicSpotTotalData: [],
@@ -695,7 +721,7 @@ export default {
       currentItem: {
         Name: '',
         Picture: {
-          PictureUrl1: ''
+          PictureUrl1: '' // 要先定義，不然會報錯
         },
         Phone: '',
         WebsiteUrl: '',
@@ -704,24 +730,24 @@ export default {
           PositionLon: ''
         }
       },
-      pageValue: false,
-      scenicSpotCurrentPage: 1,
-      scenicSpotPagesize: 30,
-      scenicSpotTotalPages: [],
-      searchScenicSpotCurrentPage: 1,
-      searchScenicSpotPagesize: 30,
-      searchScenicSpotTotalPages: [],
+      pageValue: false, // 只有一頁就隱藏分頁 = true
+      scenicSpotCurrentPage: 1, // scenicSpot 初始頁
+      scenicSpotPagesize: 32, // scenicSpot 每頁的數量
+      scenicSpotTotalPages: [], // scenicSpot 頁面全部數量
+      searchScenicSpotCurrentPage: 1, // search-scenicSpot 初始頁
+      searchScenicSpotPagesize: 32, // search-scenicSpot 每頁的數量
+      searchScenicSpotTotalPages: [], // search-scenicSpot 頁面全部數量
       restaurantCurrentPage: 1,
-      restaurantPagesize: 30,
+      restaurantPagesize: 32,
       restaurantTotalPages: [],
       searchRestaurantCurrentPage: 1,
-      searchRestaurantPagesize: 30,
+      searchRestaurantPagesize: 32,
       searchRestaurantTotalPages: [],
       hotelCurrentPage: 1,
-      hotelPagesize: 30,
+      hotelPagesize: 32,
       hotelTotalPages: [],
       searchHotelCurrentPage: 1,
-      searchHotelPagesize: 30,
+      searchHotelPagesize: 32,
       searchHotelTotalPages: []
     }
   },
@@ -737,24 +763,25 @@ export default {
     selected () {
       this.searchResult = 0
       this.searchFailed = false
+      // 當重新選擇地區時，數量重設
       this.pageValue = false
       this.scenicSpotCurrentPage = 1
-      this.scenicSpotPagesize = 30
+      this.scenicSpotPagesize = 32
       this.scenicSpotTotalPages = []
       this.searchScenicSpotCurrentPage = 1
-      this.searchScenicSpotPagesize = 30
+      this.searchScenicSpotPagesize = 32
       this.searchScenicSpotTotalPages = []
       this.restaurantCurrentPage = 1
-      this.restaurantPagesize = 30
+      this.restaurantPagesize = 32
       this.restaurantTotalPages = []
       this.searchRestaurantCurrentPage = 1
-      this.searchRestaurantPagesize = 30
+      this.searchRestaurantPagesize = 32
       this.searchRestaurantTotalPages = []
       this.hotelCurrentPage = 1
-      this.hotelPagesize = 30
+      this.hotelPagesize = 32
       this.hotelTotalPages = []
       this.searchHotelCurrentPage = 1
-      this.searchHotelPagesize = 30
+      this.searchHotelPagesize = 32
       this.searchHotelTotalPages = []
       this.activeName = 'scenicSpot'
       this.scenicSpotData = []
@@ -767,24 +794,25 @@ export default {
     keyword () {
       this.searchResult = 0
       this.searchFailed = false
+      // 當重新輸入關鍵字時，數量重設
       this.pageValue = false
       this.scenicSpotCurrentPage = 1
-      this.scenicSpotPagesize = 30
+      this.scenicSpotPagesize = 32
       this.scenicSpotTotalPages = []
       this.searchScenicSpotCurrentPage = 1
-      this.searchScenicSpotPagesize = 30
+      this.searchScenicSpotPagesize = 32
       this.searchScenicSpotTotalPages = []
       this.restaurantCurrentPage = 1
-      this.restaurantPagesize = 30
+      this.restaurantPagesize = 32
       this.restaurantTotalPages = []
       this.searchRestaurantCurrentPage = 1
-      this.searchRestaurantPagesize = 30
+      this.searchRestaurantPagesize = 32
       this.searchRestaurantTotalPages = []
       this.hotelCurrentPage = 1
-      this.hotelPagesize = 30
+      this.hotelPagesize = 32
       this.hotelTotalPages = []
       this.searchHotelCurrentPage = 1
-      this.searchHotelPagesize = 30
+      this.searchHotelPagesize = 32
       this.searchHotelTotalPages = []
       this.activeName = 'scenicSpot'
       this.scenicSpotData = []
@@ -796,12 +824,15 @@ export default {
     }
   },
   mounted () {
+    // 初始化 API 驗證
+    this.getAuthorizationHeader()
     this.isLoading = true
     setTimeout(() => {
       this.isLoading = false
     }, 2000)
   },
   methods: {
+    // scenicSpotCurrentPage 改變觸發
     scenicSpotCurrentChange (currentPage) {
       this.isLoading = true
       this.scrollToTabs()
@@ -832,19 +863,22 @@ export default {
         this.isLoading = false
       }, 1000)
     },
+    // scenicSpotTotalData 中取得每頁顯示筆數範圍
     getScenicSpotPages () {
       if (this.selected !== '') {
         const start = (this.scenicSpotCurrentPage - 1) * this.scenicSpotPagesize
         let end = start + this.scenicSpotPagesize
-        if (this.scenicSpotTotalData.length <= 30) {
+        // 如果搜尋筆數小於等於最少 32 筆，就顯示 searchScenicSpotData 長度，只有一頁就隱藏分頁
+        if (this.scenicSpotTotalData.length <= 32) {
           end = this.scenicSpotTotalData.length
           this.pageValue = true
         }
+        // 依照目前所在頁面動態取得數量範圍
         this.scenicSpotTotalPages = this.scenicSpotTotalData.slice(start, end)
       } else if (this.keyword !== '') {
         const start = (this.searchScenicSpotCurrentPage - 1) * this.searchScenicSpotPagesize
         let end = start + this.searchScenicSpotPagesize
-        if (this.searchScenicSpotData.length <= 30) {
+        if (this.searchScenicSpotData.length <= 32) {
           end = this.searchScenicSpotData.length
           this.pageValue = true
         }
@@ -855,7 +889,7 @@ export default {
       if (this.selected !== '') {
         const start = (this.restaurantCurrentPage - 1) * this.restaurantPagesize
         let end = start + this.restaurantPagesize
-        if (this.restaurantTotalData.length <= 30) {
+        if (this.restaurantTotalData.length <= 32) {
           end = this.restaurantTotalData.length
           this.pageValue = true
         }
@@ -863,7 +897,7 @@ export default {
       } else if (this.keyword !== '') {
         const start = (this.searchRestaurantCurrentPage - 1) * this.searchRestaurantPagesize
         let end = start + this.searchRestaurantPagesize
-        if (this.searchRestaurantData.length <= 30) {
+        if (this.searchRestaurantData.length <= 32) {
           end = this.searchRestaurantData.length
           this.pageValue = true
         }
@@ -874,7 +908,7 @@ export default {
       if (this.selected !== '') {
         const start = (this.hotelCurrentPage - 1) * this.hotelPagesize
         let end = start + this.hotelPagesize
-        if (this.hotelTotalData.length <= 30) {
+        if (this.hotelTotalData.length <= 32) {
           end = this.hotelTotalData.length
           this.pageValue = true
         }
@@ -882,7 +916,7 @@ export default {
       } else if (this.keyword !== '') {
         const start = (this.searchHotelCurrentPage - 1) * this.searchHotelPagesize
         let end = start + this.searchHotelPagesize
-        if (this.searchHotelData.length <= 30) {
+        if (this.searchHotelData.length <= 32) {
           end = this.searchHotelData.length
           this.pageValue = true
         }
@@ -890,6 +924,7 @@ export default {
       }
     },
     getData () {
+      // 執行前先清空 pagination
       this.pageValue = true
       this.scenicSpotTotalData = []
       this.searchScenicSpotData = []
@@ -897,6 +932,7 @@ export default {
       this.searchRestaurantData = []
       this.hotelTotalData = []
       this.searchHotelData = []
+
       if (this.selected !== '') {
         this.getScenicSpotData()
         this.getRestaurantData()
@@ -909,7 +945,7 @@ export default {
       }
     },
     keywordSearch (e) {
-      const reg = new RegExp(e.target.value, 'gi')
+      const reg = new RegExp(e.target.value, 'gi') // 全域 (Global) 比對並忽略大小寫 (Ignore case)
       this.keyword = reg
     },
     scrollToContent () {
@@ -938,23 +974,26 @@ export default {
       this.isLoading = true
       this.axios({
         method: 'get',
-        url: 'https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$format=JSON',
+        url: 'https://tdx.transportdata.tw/api/basic/v2/Tourism/ScenicSpot?$format=JSON',
         headers: this.getAuthorizationHeader()
       })
         .then(res => {
           this.scenicSpotTotalData = res.data
           this.scenicSpotTotalData.forEach(item => {
+            // 去除名字上的下底線 "_"
             item.ScenicSpotName = item.ScenicSpotName.replace(/_|ˍ/g, ' ')
           })
+          // 比對關鍵字，只要有 return 就要有值去接它
           this.searchScenicSpotData = this.scenicSpotTotalData.filter(value => value.ScenicSpotName.match(this.keyword))
           if (this.searchScenicSpotData.length === 0) {
             console.log('this.searchScenicSpotData.length === 0')
             this.scrollToContent()
             this.searchResult += 1
-            this.searchFailed = true
-            this.resultScenicSpot = true
+            this.searchFailed = true // 搜尋不到資料
+            this.resultScenicSpot = true // 紀錄 ScenicSpot 沒有搜尋到資料
             this.isLoading = false
           } else {
+            // 取得 ScenicSpot 分頁資訊
             this.scenicSpotData = this.searchScenicSpotData
             this.getScenicSpotPages()
             this.scrollToContent()
@@ -963,6 +1002,7 @@ export default {
           }
         })
         .catch(err => {
+        // 需加上 response 才能傳送失敗結果
           console.log(err.response)
         })
     },
@@ -971,21 +1011,25 @@ export default {
       const currentCity = this.selected
       this.axios({
         method: 'get',
-        url: `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${currentCity}?&$format=JSON`,
+        url: `https://tdx.transportdata.tw/api/basic/v2/Tourism/ScenicSpot/${currentCity}?&$format=JSON`,
         headers: this.getAuthorizationHeader()
       })
         .then(res => {
           this.scenicSpotTotalData = res.data
           this.scenicSpotTotalData.forEach(item => {
+            // 去除名字上的下底線 "_、ˍ"
             item.ScenicSpotName = item.ScenicSpotName.replace(/_|ˍ/g, ' ')
           })
+          // 當資料完成後，再取消讀取畫面
           if (this.scenicSpotTotalData.length > 0) {
+            // 取得 ScenicSpot 分頁資訊
             this.getScenicSpotPages()
             this.isLoading = false
           }
           this.scrollToContent()
         })
         .catch(err => {
+        // 需加上 response 才能傳送失敗結果
           console.log(err.response)
         })
     },
@@ -993,7 +1037,7 @@ export default {
       this.isLoading = true
       this.axios({
         method: 'get',
-        url: 'https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?$format=JSON',
+        url: 'https://tdx.transportdata.tw/api/basic/v2/Tourism/Restaurant?$format=JSON',
         headers: this.getAuthorizationHeader()
       })
         .then(res => {
@@ -1006,9 +1050,10 @@ export default {
             this.scrollToContent()
             this.searchResult += 1
             this.searchFailed = true
-            this.resultRestaurant = true
+            this.resultRestaurant = true // 紀錄 Restaurant 沒有搜尋到資料
             this.isLoading = false
           } else {
+            // 取得 restaurant 分頁資訊
             this.restaurantData = this.searchRestaurantData
             this.getRestaurantPages()
             this.scrollToContent()
@@ -1025,7 +1070,7 @@ export default {
       const currentCity = this.selected
       this.axios({
         method: 'get',
-        url: `https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant/${currentCity}?&$format=JSON`,
+        url: `https://tdx.transportdata.tw/api/basic/v2/Tourism/Restaurant/${currentCity}?&$format=JSON`,
         headers: this.getAuthorizationHeader()
       })
         .then(res => {
@@ -1034,6 +1079,7 @@ export default {
             item.RestaurantName = item.RestaurantName.replace(/_|ˍ/g, ' ')
           })
           if (this.restaurantTotalData.length > 0) {
+            // 取得 restaurant 分頁資訊
             this.getRestaurantPages()
             this.isLoading = false
           }
@@ -1047,7 +1093,7 @@ export default {
       this.isLoading = true
       this.axios({
         method: 'get',
-        url: 'https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel?$format=JSON',
+        url: 'https://tdx.transportdata.tw/api/basic/v2/Tourism/Hotel?$format=JSON',
         headers: this.getAuthorizationHeader()
       })
         .then(res => {
@@ -1060,9 +1106,10 @@ export default {
             this.scrollToContent()
             this.searchResult += 1
             this.searchFailed = true
-            this.resultHotel = true
+            this.resultHotel = true // 紀錄 Hotel 沒有搜尋到資料
             this.isLoading = false
           } else {
+            // 取得 hotel 分頁資訊
             this.hotelData = this.searchHotelData
             this.getHotelPages()
             this.scrollToContent()
@@ -1071,6 +1118,7 @@ export default {
           }
         })
         .catch(err => {
+        // 需加上 response 才能傳送失敗結果
           console.log(err.response)
         })
     },
@@ -1079,7 +1127,7 @@ export default {
       const currentCity = this.selected
       this.axios({
         method: 'get',
-        url: `https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel/${currentCity}?&$format=JSON`,
+        url: `https://tdx.transportdata.tw/api/basic/v2/Tourism/Hotel/${currentCity}?&$format=JSON`,
         headers: this.getAuthorizationHeader()
       })
         .then(res => {
@@ -1088,6 +1136,7 @@ export default {
             item.HotelName = item.HotelName.replace(/_|ˍ/g, ' ')
           })
           if (this.hotelTotalData.length > 0) {
+            // 取得 hotel 分頁資訊
             this.getHotelPages()
             this.isLoading = false
           }
@@ -1097,16 +1146,33 @@ export default {
           console.log(err.response)
         })
     },
+    // API 驗證
     getAuthorizationHeader () {
-      const AppID = process.env.VUE_APP_APPID
-      const AppKey = process.env.VUE_APP_APPKEY
-      const GMTString = new Date().toGMTString()
-      const ShaObj = new jsSHA('SHA-1', 'TEXT')
-      ShaObj.setHMACKey(AppKey, 'TEXT')
-      ShaObj.update('x-date: ' + GMTString)
-      const HMAC = ShaObj.getHMAC('B64')
-      const Authorization = 'hmac username=\"' + AppID + '\", algorithm=\"hmac-sha1\", headers=\"x-date\", signature=\"' + HMAC + '\"'
-      return { Authorization: Authorization, 'X-Date': GMTString }
+      const parameter = {
+        grant_type: 'client_credentials',
+        client_id: process.env.VUE_APP_CLIENTID,
+        client_secret: process.env.VUE_APP_CLIENTSECRET
+      }
+      this.axios({
+        method: 'POST',
+        url: process.env.VUE_APP_AUTHURL,
+        dataType: 'JSON',
+        data: this.$qs.stringify(parameter), // 需搭配 qs 才能順利將 content-type 改為 application/x-www-form-urlencoded
+        headers: {
+          'content-type': 'application/x-www-form-urlencoded'
+        }
+      })
+        .then(res => {
+          this.axios.defaults.headers.common.Authorization = `Bearer ${res.data.access_token}`
+          // 取得 API 資料
+          // this.getGeometry()
+          // this.getRouteName()
+          // this.getEstimatedTimeOfArrival()
+          // this.getStopOfRoute()
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }
