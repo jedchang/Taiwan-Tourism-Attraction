@@ -6,6 +6,9 @@ module.exports = {
   // 本地預覽 file:// 改為相對路徑 './'
   // publicPath: './'
 
+  // ESLint 的 error 只顯示成警告，不中斷編譯（想完全關閉改成 false）
+  lintOnSave: false,  //'warning'
+
   chainWebpack: config => {
     config.plugin('html').tap(args => {
       args[0].title = 'Taiwan Tourism Attraction'
