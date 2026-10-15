@@ -1,7 +1,9 @@
 # Taiwan Tourism Attraction
 
 臺灣旅遊景點導覽
-![](https://images2.imgbox.com/e2/82/JCJMCvUZ_o.jpg)
+![](https://raw.githubusercontent.com/jedchang/Taiwan-Tourism-Attraction/refs/heads/master/preview.jpg)
+
+<!-- ![](https://github.com/jedchang/Taiwan-Tourism-Attraction/blob/master/preview.jpg) -->
 
 ## Demo
 
@@ -36,6 +38,7 @@ https://jedchang.github.io/Taiwan-Tourism-Attraction/
 - [x] RWD 版面樣式
 - [x] 分頁功能
 - [x] 搜尋關鍵字功能
+- [x] 改串接 TDX V2.1 API
 
 ## Remark
 
