@@ -7,12 +7,12 @@
     margin-bottom: 35px;
     padding: 8px;
     border-radius: 6px;
-    height: 407px;
+    height: 423px;
     @include small {
-      height: 416px;
+      height: auto;
     }
     @include extraSmall {
-      height: 470px;
+      height: auto;
       width: 100%;
       margin: 0 0 30px 0;
     }
@@ -240,9 +240,11 @@
       padding-bottom: 5px;
       text-align: left;
       @include small {
+        height: auto;
         text-align: center;
       }
       @include extraSmall {
+        height: auto;
         text-align: center;
       }
     }

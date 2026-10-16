@@ -20,6 +20,7 @@ module.exports = {
 
   // 使用 scss 全域變數
   css: {
+    sourceMap: true,
     loaderOptions: {
       sass: {
         prependData: `

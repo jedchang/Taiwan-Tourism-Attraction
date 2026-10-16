@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import { Tabs, TabPane, Dialog, Button, Pagination } from 'element-ui'
+import { Tabs, TabPane, Dialog, Button, Pagination, Select, Option } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
 import qs from 'qs'
@@ -32,6 +32,8 @@ Vue.use(TabPane)
 Vue.use(Dialog)
 Vue.use(Button)
 Vue.use(Pagination)
+Vue.use(Select)
+Vue.use(Option)
 
 // 全域註冊 qs
 Vue.prototype.$qs = qs

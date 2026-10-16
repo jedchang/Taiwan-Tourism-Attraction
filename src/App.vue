@@ -30,22 +30,21 @@
                 <p>探索您的生活，旅行您想去的地方，立即開始行動吧!</p>
               </div>
               <div class="search-inner">
-                <select
+                <el-select
                   v-model="selected"
                   :disabled="keyword !== ''"
-                  class="form-control city-name"
+                  class="city-name"
+                  placeholder="-- 請選擇城市 --"
+                  popper-class="city-popper"
                 >
-                  <option value="" selected>
-                    -- 請選擇城市 --
-                  </option>
-                  <option
+                  <el-option label="-- 請選擇城市 --" value="" />
+                  <el-option
                     v-for="city in cityData"
                     :key="city.CityID"
+                    :label="city.CityName"
                     :value="city.City"
-                  >
-                    {{ city.CityName }}
-                  </option>
-                </select>
+                  />
+                </el-select>
                 <input
                   v-model="keyword"
                   type="text"
@@ -387,10 +386,10 @@
             <!-- 都沒有選擇城市/關鍵字時顯示 -->
             <div
               v-if="
-                searchResult === 0 &&
-                  searchFailed === false &&
-                  keyword === '' &&
-                  selected === ''
+                scenicSpotTotalData.length === 0 &&
+                  restaurantTotalData.length === 0 &&
+                  hotelTotalData.length === 0 &&
+                  searchFailed === false
               "
               class="content-wrap no-content"
             >
@@ -1171,12 +1170,9 @@ export default {
     },
     scrollToContent() {
       const targetTop = $('#content').offset().top
-      $('html,body').animate(
-        {
-          scrollTop: targetTop
-        },
-        600
-      )
+      $('html,body')
+        .stop(true) // 停掉前一個動畫，避免連續三次疊加
+        .animate({ scrollTop: targetTop }, 600)
     },
     scrollToTabs() {
       const targetTop = $('#content').offset().top

@@ -243,28 +243,8 @@
         flex-direction: column;
       }
 
-      select {
+      .city-name {
         width: 40%;
-        height: auto;
-        padding: 15px 40px;
-        font-size: 16px;
-        line-height: 25px;
-        color: $textColor;
-        appearance: none;
-        background-image: linear-gradient(
-            45deg,
-            transparent 50%,
-            $secondaryColor 0
-          ),
-          linear-gradient(135deg, $secondaryColor 50%, transparent 0),
-          linear-gradient(90deg, $secondaryColor, $secondaryColor);
-        background-position: calc(100% - 19px) calc(1em + 8px),
-          calc(100% - 12px) calc(1em + 8px), calc(100% - 2.5em) 0.5em;
-        background-size: 7px 7px, 7px 7px, 1px 2.5em;
-        background-repeat: no-repeat;
-        letter-spacing: 1px;
-        border-radius: 6px;
-        border: 1px solid $secondaryColor;
         @include extraLarge {
           width: 35%;
         }
@@ -282,20 +262,98 @@
           width: 100%;
           margin-bottom: 20px;
         }
-        &:focus {
-          border: 1px solid $secondaryColor;
-          outline: none;
+
+        .el-input {
+          width: 100%;
         }
-        &:disabled {
-          border: 1px solid transparent;
-          background-color: #061a3a;
-          opacity: 0.6;
+
+        // ---------- 輸入框 ----------
+        .el-input--suffix .el-input__inner,
+        .el-input .el-input__inner {
+          height: 57px;
+          line-height: 57px;
+          padding: 0 50px 0 40px; // 右側留 50px，文字才不會壓到分隔線
+          font-size: 16px;
+          letter-spacing: 1px;
+          color: $textColor;
+          background-color: #fff;
+          border: 1px solid $secondaryColor;
+          border-radius: 6px;
+          transition: $setTransition;
+
+          &::placeholder {
+            color: $textColor;
+          }
+          &:hover,
+          &:focus {
+            border-color: $secondaryColor;
+          }
+        }
+
+        .el-input.is-focus .el-input__inner {
+          border-color: $secondaryColor;
+        }
+
+        // ---------- 右側：分隔線 + 箭頭 ----------
+        .el-input__suffix {
+          right: 0;
+          width: 40px;
+          height: 100%;
+
+          &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 1px;
+            background-color: $secondaryColor;
+          }
+        }
+
+        .el-input__suffix-inner {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          height: 100%;
           pointer-events: none;
-          cursor: default;
-          color: #959595;
-          background-image: linear-gradient(45deg, transparent 50%, #38609f 0),
-            linear-gradient(135deg, #38609f 50%, transparent 0),
-            linear-gradient(90deg, #38609f, #38609f);
+        }
+
+        .el-icon-arrow-up {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          font-size: 0;
+          line-height: 1;
+
+          &::before {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 7px solid $secondaryColor;
+          }
+        }
+
+        // ---------- disabled ----------
+        &.is-disabled {
+          .el-input__inner {
+            border: 1px solid transparent;
+            background-color: #061a3a;
+            opacity: 0.6;
+            color: #959595;
+            cursor: default;
+          }
+          .el-input__suffix::before {
+            background-color: #38609f;
+          }
+          .el-icon-arrow-up::before {
+            border-bottom-color: #38609f;
+          }
         }
       }
 
@@ -447,7 +505,7 @@
     }
   }
   &.no-content {
-    margin: 60px 0 50px 0;
+    margin: 30px 0 40px 0;
     animation: flash 1.5s linear infinite;
     @include small {
       margin: 20px 0 0 0;
@@ -1058,6 +1116,55 @@
           }
         }
       }
+    }
+  }
+}
+
+.city-popper.el-popper {
+  margin-top: 8px;
+  border: 1px solid $secondaryColor;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+
+  // 小三角形（不要的話就隱藏）
+  .popper__arrow {
+    display: none;
+  }
+
+  // 清單區：高度與捲軸
+  .el-select-dropdown__wrap {
+    max-height: 320px;
+  }
+  .el-scrollbar__bar.is-vertical .el-scrollbar__thumb {
+    background-color: $secondaryColor;
+    opacity: 0.5;
+  }
+
+  // 每一個選項
+  .el-select-dropdown__item {
+    height: 44px;
+    line-height: 44px;
+    padding: 0 40px;
+    font-family: 'Rubik', Arial, sans-serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: $textColor;
+    text-align: left;
+    transition: $setTransition;
+
+    // 滑鼠移上去
+    &.hover,
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+      color: $secondaryColor;
+    }
+
+    // 目前選中的項目
+    &.selected {
+      color: #fff;
+      font-weight: 600;
+      background-color: $secondaryColor;
     }
   }
 }
